@@ -1,0 +1,20 @@
+{
+  "name": "hok0ri",
+  "tag": "Cobalt",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "hok0ri_RoA",
+    "yt": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Shovel Knight",
+      "skin": "Champion",
+      "hex": "A44B-C920-2226-96DE-E6EB-8199-EE00",
+      "customImg": true
+    }
+  ]
+}

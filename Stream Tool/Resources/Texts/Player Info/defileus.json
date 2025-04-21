@@ -1,0 +1,23 @@
+{
+  "name": "defileus",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "DefileusFGC",
+    "twitch": "DefileusFGC",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Ranno",
+      "skin": "Champion"
+    },
+    {
+      "character": "Bhadra",
+      "skin": "11"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ async function init() {
     // this will allow us to load functions asynchronously
     const promises = [];
 
-    
+
     // we need to set the current char path
     await settings.load();
     stPath.char = settings.isWsChecked() ? stPath.charWork : stPath.charBase;
@@ -55,7 +55,7 @@ async function init() {
         promises.push(players[i].charChange("Random"));
     }
 
-    
+
     // initialize the character list
     promises.push(charFinder.loadCharacters());
 
@@ -97,7 +97,7 @@ async function init() {
     // add in any plugins found on the plugins folder:
     const pluginNames = await getPluginList();
     for (let i = 0; i < pluginNames.length; i++) {
-        import("./GUI Plugins/" + pluginNames[i]);        
+        import("./GUI Plugins/" + pluginNames[i]);
     }
 
 }

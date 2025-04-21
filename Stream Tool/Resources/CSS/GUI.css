@@ -15,8 +15,11 @@
   --bg1: #131318;
   --bg2: #383838;
   --bg3: #1e1e24;
+  --bg3_angry: #390000;
+  --bg3_happy: #103200;
   --bg4: #444444b6;
   --bg5: #2b2b2b;
+  --bg6: #272729;
   --selected: #2ba4eb;
   --focused: #686868;
   --iconFill: #b6b6b6;
@@ -794,14 +797,22 @@ button:hover {
   background-color: var(--text2);
 }
 
+#updateRegion {
+  transition: background-color 0.1s;
+}
+
 #updateRegion:hover {
-  background-color: var(--bg3);
+  background-color: var(--bg6);
 }
 #updateRegion:active{
   background-color: var(--bg5);
 }
 
-#botBarBracket, #settingsRegion {
+input[type="file"] {
+  display: none;
+}
+
+#botBarBracket, #settingsRegion, #uploadReplayIcon {
   width: 32px;
   background-color: var(--bg3)
 }
@@ -811,17 +822,23 @@ button:hover {
   height: 22px;
   color: var(--text2);
 }
+#uploadReplayIcon {
+  width: 28px;
+  height: 28px;
+  color: var(--text2);
+}
 #configIcon {
   width: 20px;
   height: 20px;
   fill: var(--text2);
 }
 
-#botBarBracket:hover, #settingsRegion:hover {
+#botBarBracket:hover, #settingsRegion:hover, #uploadReplayIcon:hover {
   background-color: var(--bg1);
+  cursor: pointer;
 }
 
-#botBarBracket:active, #settingsRegion:active{
+#botBarBracket:active, #settingsRegion:active, #uploadReplayIcon:active {
   background-color: var(--bg5);
 }
 
@@ -1243,4 +1260,17 @@ button:hover {
 
 #caster1, #caster2 {
   display: none;
+}
+
+
+.pLvl, .stocksNum, #lowestSeedNum {
+  width: 36px;
+  outline: none;
+  border: 1px solid var(--bg4);
+  border-radius: 3px;
+  background-color: var(--bg4);
+  color: var(--text1);
+  font-family: 'Roboto-Medium';
+  font-size: 16px;
+  padding-left: 3px;
 }

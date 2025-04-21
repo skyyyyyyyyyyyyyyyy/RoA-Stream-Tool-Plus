@@ -1,0 +1,21 @@
+{
+  "name": "PiKayMaster",
+  "tag": "",
+  "pronouns": "He/Him",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Mollo",
+      "skin": "Default",
+      "hex": "7918-46E6-B45C-007E-7918-4C3F-6844-DFCB-2CD0-1700-37F9",
+      "customImg": true
+    }
+  ]
+}

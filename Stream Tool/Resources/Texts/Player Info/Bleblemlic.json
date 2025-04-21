@@ -1,0 +1,25 @@
+{
+  "name": "Bleblemlic",
+  "tag": "",
+  "pronouns": "He/Him",
+  "socials": {
+    "twitter": "TheRealBleb",
+    "twitch": "bleblemlicc",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Archarid",
+      "skin": "20"
+    },
+    {
+      "character": "Etalus",
+      "skin": "Default",
+      "hex": "E2E2-E2DA-0000-5947-5DCC",
+      "customImg": true
+    }
+  ]
+}

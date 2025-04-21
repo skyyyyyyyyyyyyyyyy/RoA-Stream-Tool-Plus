@@ -1,0 +1,16 @@
+{
+  "name": "CaTS",
+  "tag": "",
+  "pronouns": "He/Him",
+  "twitter": "CaTS_RoA",
+  "twitch": "soa_cats",
+  "yt": "",
+  "characters": [
+    {
+      "character": "Clairen",
+      "skin": "Default",
+      "hex": "7D00-0629-3251-4A00-B9FF-A800-8888-C000-5AFF-A800-FF93",
+      "customImg": true
+    }
+  ]
+}

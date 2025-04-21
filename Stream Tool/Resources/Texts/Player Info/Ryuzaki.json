@@ -1,0 +1,20 @@
+{
+  "name": "Ryuzaki",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "ryuzaki_osu",
+    "yt": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Kragg",
+      "skin": "Summit",
+      "hex": "482E-92FF-FFFF-EC1C-2448-2E92-EF00",
+      "customImg": true
+    }
+  ]
+}

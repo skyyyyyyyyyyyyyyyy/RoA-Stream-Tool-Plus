@@ -1,0 +1,20 @@
+{
+  "name": "Yiffbait",
+  "tag": "Set",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Kragg",
+      "skin": "Default",
+      "hex": "7EFF-51FF-FFFF-5EDB-D7FF-FFFF-7000",
+      "customImg": true
+    }
+  ]
+}

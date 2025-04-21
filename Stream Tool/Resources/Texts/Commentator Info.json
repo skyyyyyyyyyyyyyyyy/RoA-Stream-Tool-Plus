@@ -1,5 +1,67 @@
 [
   {
+    "name": "2JANK",
+    "tag": "",
+    "pronouns": "Any/All",
+    "socials": {
+      "twitter": "BALLSTICKMAN",
+      "twitch": "",
+      "yt": "",
+      "bsky": "",
+      "masto": "",
+      "cohost": ""
+    }
+  },
+  {
+    "name": "Ahntye",
+    "tag": "",
+    "pronouns": "She/They",
+    "socials": {
+      "twitter": "Ahntye",
+      "twitch": "ahntye",
+      "yt": "",
+      "masto": "",
+      "cohost": ""
+    }
+  },
+  {
+    "name": "Cats",
+    "tag": "",
+    "pronouns": "Any/All",
+    "socials": {
+      "twitter": "CaTS_RoA",
+      "twitch": "cats_roa",
+      "yt": "",
+      "bsky": "",
+      "masto": "",
+      "cohost": ""
+    }
+  },
+  {
+    "name": "hok0ri",
+    "tag": "Cobalt",
+    "pronouns": "she/her",
+    "socials": {
+      "twitter": "hok0ri_",
+      "twitch": "hok0ri_RoA",
+      "yt": "",
+      "masto": "",
+      "cohost": ""
+    }
+  },
+  {
+    "name": "Mathias Wolfbrok",
+    "tag": "",
+    "pronouns": "He/They",
+    "socials": {
+      "twitter": "mathias_wolfbrok",
+      "twitch": "MathiasWolfbrok",
+      "yt": "",
+      "masto": "MathiasWolfbrok@fgc.network ",
+      "cohost": ""
+    }
+  },
+  {
     "name": "Readek",
     "tag": "",
     "pronouns": "",
@@ -9,6 +71,19 @@
       "yt": "Readek",
       "masto": "Readek@mstdn.social",
       "cohost": "Readek"
+    }
+  },
+  {
+    "name": "Retro",
+    "tag": "",
+    "pronouns": "He/They",
+    "socials": {
+      "twitter": "",
+      "twitch": "retroroa",
+      "yt": "",
+      "bsky": "",
+      "masto": "",
+      "cohost": ""
     }
   },
   {
@@ -22,6 +97,32 @@
       "bsky": "Bluesky",
       "masto": "Mastodon",
       "cohost": "Cohost"
+    }
+  },
+  {
+    "name": "TheDripCollector",
+    "tag": "",
+    "pronouns": "He/him",
+    "socials": {
+      "twitter": "GiveMeYourDrip",
+      "twitch": "",
+      "yt": "",
+      "bsky": "",
+      "masto": "",
+      "cohost": ""
+    }
+  },
+  {
+    "name": "ぴんがす maxime",
+    "tag": "",
+    "pronouns": "",
+    "socials": {
+      "twitter": "pingas7073",
+      "twitch": "maxime_pingas",
+      "yt": "",
+      "bsky": "",
+      "masto": "",
+      "cohost": ""
     }
   }
 ]

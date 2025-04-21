@@ -1,5 +1,9 @@
+import { bestOf } from "../BestOf.mjs";
 import { resizeText } from "../../Utils/Resize Text.mjs";
 import { updateText } from "../../Utils/Update Text.mjs";
+import { fadeIn } from "../../Utils/Fade In.mjs";
+import { fadeInTimeVs } from "../VsGlobals.mjs";
+import { current } from "../../Utils/Globals.mjs";
 
 const scoreSize = 48;
 
@@ -61,6 +65,16 @@ export class TeamScore {
             resizeText(this.#scoreNum);
 
         }
+
+    }
+
+    hide() {
+        
+    }
+
+    show() {
+        
+        
 
     }
 

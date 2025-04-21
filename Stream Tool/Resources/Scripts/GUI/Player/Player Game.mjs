@@ -113,6 +113,9 @@ export class PlayerGame extends Player {
         // set up a trail for the vs screen
         await this.setTrailImage();
 
+        await this.setIdleImg();
+        await this.setTauntImg();
+
 
         // change the background character image (if first 2 players)
         if (this.pNum-1 < 2) {
@@ -351,6 +354,40 @@ export class PlayerGame extends Player {
         context.font = font;
         const metrics = context.measureText(text);
         return metrics.width;
+    }
+
+    async setIdleImg() {
+        this.idleSrc = await getRecolorImage(
+            this.shader,
+            this.char,
+            this.skin,
+            this.charInfo.colorData,
+            "Idle",
+            this.randomImg
+        );
+        this.idleBrowserSrc = await this.getBrowserSrc(
+            this.char, this.skin, "Idle", this.randomImg
+        );
+        this.idleFC = this.charInfo.idleFC;
+        this.idleY = this.charInfo.idleY;
+        this.idleS = this.charInfo.idleS || 6;
+    }
+
+    async setTauntImg() {
+        this.tauntSrc = await getRecolorImage(
+            this.shader,
+            this.char,
+            this.skin,
+            this.charInfo.colorData,
+            "Taunt",
+            this.randomImg
+        );
+        this.tauntBrowserSrc = await this.getBrowserSrc(
+            this.char, this.skin, "Taunt", this.randomImg
+        );
+        this.tauntFC = this.charInfo.tauntFC;
+        this.tauntY = this.charInfo.tauntY;
+        this.tauntS = this.charInfo.tauntS || 4;
     }
 
 }

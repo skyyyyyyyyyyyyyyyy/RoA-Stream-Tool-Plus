@@ -16,7 +16,7 @@ export class Player {
      * @param {HTMLElement} bgEl - Character background video element
      * @param {Number} id - Player slot
      */
-    constructor(wrapEl, infoEl, charaEl, bgEl, id) {
+    constructor(wrapEl, infoEl, charaEl, id, pIcon, pAnim) {
 
         // player name and tag
         const nameEl = wrapEl.getElementsByClassName("name")[0];
@@ -29,8 +29,16 @@ export class Player {
         // player character
         const charEl = charaEl.getElementsByClassName("char")[0];
         const trailEl = charaEl.getElementsByClassName("trail")[0];
-        this.#pChar = new PlayerCharacter(charEl, trailEl, bgEl);
+        this.#pChar = new PlayerCharacter(charEl, trailEl, pIcon, pAnim, id);
 
+    }
+
+    /**
+     * Gets this player's character class
+     * @returns {PlayerCharacter}
+     */
+    char() {
+        return this.#pChar;
     }
 
 

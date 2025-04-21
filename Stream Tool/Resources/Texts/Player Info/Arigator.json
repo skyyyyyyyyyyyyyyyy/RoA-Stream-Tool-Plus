@@ -1,0 +1,24 @@
+{
+  "name": "Arigator",
+  "tag": "Cobalt",
+  "pronouns": "He/Him",
+  "socials": {
+    "twitter": "Ari_Was_Taken",
+    "twitch": "Arrigator",
+    "yt": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Wrastor",
+      "skin": "Champion"
+    },
+    {
+      "character": "Clairen",
+      "skin": "Default",
+      "hex": "4136-501E-1E63-620E-99A4-9EDF-FFE6-6300-91FF-FF00-FFC5",
+      "customImg": true
+    }
+  ]
+}

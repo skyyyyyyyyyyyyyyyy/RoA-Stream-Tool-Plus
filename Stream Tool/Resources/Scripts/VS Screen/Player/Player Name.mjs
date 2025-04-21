@@ -5,8 +5,8 @@ import { resizeText } from "../../Utils/Resize Text.mjs";
 import { gamemode } from "../Gamemode Change.mjs";
 import { fadeInTimeVs, fadeOutTimeVs, introDelayVs } from "../VsGlobals.mjs";
 
-const playerSize = 90;
-const tagSize = 50;
+const playerSize = 50;
+const tagSize = 26;
 const playerSizeDubs = 45;
 const tagSizeDubs = 25;
 
@@ -79,7 +79,7 @@ export class PlayerName {
      */
     async update(name, tag) {
 
-        let delayTime = introDelayVs + .3;
+        let delayTime = current.delay + .3;
 
         // if not loading up
         if (!current.startup) {
@@ -140,7 +140,7 @@ export class PlayerName {
 
     /** Displays the text wrapper, fading it in */
     show() {
-        fadeIn(this.#wrapperEl, fadeInTimeVs, introDelayVs + .3);
+        fadeIn(this.#wrapperEl, fadeInTimeVs, current.delay + .3);
         this.#wrapperEl.style.display = "block";
     }
 

@@ -3,7 +3,13 @@ import { bracketPlayers, players } from './Player/Players.mjs';
 import { PlayerBracket } from "./Player/Player Bracket.mjs";
 import { displayNotif } from './Notifications.mjs';
 import { scores } from './Score/Scores.mjs';
-import { inside } from './Globals.mjs';
+import {inside, stPath} from './Globals.mjs';
+import {readReplayFile} from "./Replay Reader/Replay Reader.mjs";
+import {customChange, setCurrentPlayer} from "./Custom Skin.mjs";
+import {getJson} from "./File System.mjs";
+import {Score} from "./Score/Score.mjs";
+import {settings} from "./Settings.mjs";
+import {setYetToUpdate} from "./Write Scoreboard.mjs";
 
 const bRoundSelect = document.getElementById('bracketRoundSelect');
 const bEncountersDiv = document.getElementById('bracketEncounters');
@@ -33,11 +39,67 @@ let previousRound;
 
 // its always good to listen closely
 document.getElementById('botBarBracket').addEventListener("click", () => {viewport.toBracket()});
+document.getElementById('replayUpload').addEventListener("change", (event) => {fileUploadButton(event)});
+document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
+document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
 bRoundSelect.addEventListener("change", () => {createEncounters()});
 document.getElementById('bracketGoBack').addEventListener("click", () => {viewport.toCenter()});
 document.getElementById('bracketUpdate').addEventListener("click", () => {updateBracket()});
 // force change event for initial creation of encounters
 bRoundSelect.dispatchEvent(new Event('change'));
+
+
+async function fileUploadButton(event) {
+    event.preventDefault();
+
+    const file = event.target.files.item(0);
+    const replayFile = await file.text();
+
+    await updateGUIFromReplayFile(replayFile);
+}
+
+
+async function fileUploadDragDrop(event) {
+    event.preventDefault();
+
+    const file = event.dataTransfer.files.item(0);
+
+    if (file.name.split(".").pop() === "roa"){
+        const replayFile = await file.text();
+
+        await updateGUIFromReplayFile(replayFile);
+    }
+    else alert("That is NOT a .roa file!");
+
+}
+
+
+async function updateGUIFromReplayFile(replayFile) {
+
+    let replay = readReplayFile(replayFile);
+
+    for (let i = 0; i < 2; i++) {
+        let GUIPlayer = players[i];
+        let replayPlayer = replay.player[i];
+
+        // this JSON call seems tacky, but I don't know how to get around it...
+        // why doesn't GUIPlayer.charChange make this exact call??
+        GUIPlayer.charInfo = await getJson(`${stPath.char}/${replayPlayer.character}/_Info`);
+
+        setCurrentPlayer(GUIPlayer);
+
+        GUIPlayer.setName(replayPlayer.username);
+
+        if (settings.isReplaysUpdateScoreChecked()){
+            scores[i].setScore(replayPlayer.wins);
+        }
+
+        await GUIPlayer.charChange(replayPlayer.character, true);
+        await customChange(replayPlayer.skinCode, replayPlayer.taunt);
+    }
+
+    setYetToUpdate(true);
+}
 
 
 /**

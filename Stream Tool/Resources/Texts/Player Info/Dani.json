@@ -1,0 +1,21 @@
+{
+  "name": "Dani",
+  "tag": "RDS",
+  "pronouns": "She/Her",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Kragg",
+      "skin": "Default",
+      "hex": "4A4A-4A2B-2B2B-5858-5800-0000-9B00",
+      "customImg": true
+    }
+  ]
+}

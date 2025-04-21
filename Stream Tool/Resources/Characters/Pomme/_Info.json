@@ -50,8 +50,7 @@
         {
             "name": "Champion",
             "hex": "CECE-DD3F-3F46-B2FF-D089-E46A-66A0-7C2E-BC16-9000",
-            "alpha": [1,1,1,1,0.75,1],
-            "force": true
+            "alpha": [1,1,1,1,0.75,1]
         },
         {
             "name": "Pool Party",
@@ -131,5 +130,11 @@
             "y": 37,
             "scale": 4.5
         }
-    }
+    },
+    "idleFC": 12,
+    "idleY": 0,
+    "idleS": 6.5,
+    "tauntFC": 12,
+    "tauntY": 0,
+    "tauntS": 4.5
 }

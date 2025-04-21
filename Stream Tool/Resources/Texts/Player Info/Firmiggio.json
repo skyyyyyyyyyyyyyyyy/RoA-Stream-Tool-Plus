@@ -1,0 +1,21 @@
+{
+  "name": "Firmiggio",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Orcane",
+      "skin": "Pool Party",
+      "hex": "7900-76DB-C5F0-3C00",
+      "customImg": true
+    }
+  ]
+}

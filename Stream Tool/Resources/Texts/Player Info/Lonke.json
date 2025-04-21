@@ -1,0 +1,21 @@
+{
+  "name": "Lonke",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "Lonkone_",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Ranno",
+      "skin": "Champion",
+      "hex": "FFFF-FFCB-3030-FF80-1A20-1531-4385-992A",
+      "customImg": true
+    }
+  ]
+}

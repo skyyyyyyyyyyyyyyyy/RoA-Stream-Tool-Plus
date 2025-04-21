@@ -1,0 +1,25 @@
+{
+  "name": "derous",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Diamond",
+      "skin": "Default"
+    },
+    {
+      "character": "Clairen",
+      "skin": "Champion",
+      "hex": "EEF3-FF00-1A65-002E-A453-80FF-547F-FF32-67FF-003D-DF34",
+      "customImg": true
+    }
+  ]
+}

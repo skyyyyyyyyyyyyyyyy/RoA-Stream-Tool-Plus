@@ -1,0 +1,27 @@
+{
+  "name": "alkihamzie",
+  "tag": "",
+  "pronouns": "He/Him",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Kragg",
+      "skin": "Default",
+      "hex": "C617-173E-4C32-C602-0269-1220-B700",
+      "customImg": true
+    },
+    {
+      "character": "Zetterburn",
+      "skin": "LoA",
+      "hex": "3C3C-3CAC-7260-F044-44FF-0072-6200-5276",
+      "customImg": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "DERZimmermann",
+  "tag": "DERZimmermann",
+  "pronouns": "",
+  "socials": {
+    "twitter": "ZimmermannDer",
+    "twitch": "derrealezimmermann",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Olympia",
+      "skin": "Default",
+      "hex": "FFF5-CEC8-C09C-E4DA-BA3C-251F-4846-53FC-FFC8-755E-4643",
+      "customImg": true
+    }
+  ]
+}

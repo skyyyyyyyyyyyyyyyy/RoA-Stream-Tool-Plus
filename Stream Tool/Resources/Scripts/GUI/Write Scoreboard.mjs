@@ -15,10 +15,16 @@ import { saveSimpleTexts } from './File System.mjs';
 const updateDiv = document.getElementById('updateRegion');
 const updateText = updateDiv.getElementsByClassName("botText")[0];
 const updateRegion = document.getElementById('updateRegion');
+let yetToUpdate = false;
+let firstTimeUpdating = true;
 
 // bottom bar update button
 updateDiv.addEventListener("click", writeScoreboard);
 
+/** Allows Bracket.mjs to tell this file that the overlay hasn't been updated since a file was uploaded */
+export function setYetToUpdate(value) {
+    yetToUpdate = value;
+}
 
 /**
  * Warns the user that a player is not ready to update yet
@@ -27,7 +33,12 @@ updateDiv.addEventListener("click", writeScoreboard);
 export function readyToUpdate(state) {
     if (state) {
         if (playersReady()) {
-            changeUpdateText("UPDATE");
+            if (yetToUpdate) {
+                changeUpdateText("DON'T FORGET TO UPDATE", "--bg3_angry");
+                yetToUpdate = false;
+            } else {
+                changeUpdateText("UPDATE");
+            }
             updateDiv.style.pointerEvents = "auto";
         }
     } else {
@@ -37,9 +48,26 @@ export function readyToUpdate(state) {
 }
 
 /** Changes the text displayed on the update button */
-export function changeUpdateText(text) {
+export function changeUpdateText(text, style) {
     updateText.innerHTML = text;
+    if (style) {
+        updateDiv.style.backgroundColor = `var(${style})`;
+    }
+    else {
+        updateDiv.style.backgroundColor = "";
+    }
 }
+
+
+/** Adds delay to green background colour when pressing update button */
+const scoreboardUpdated = async () => {
+    changeUpdateText("UPDATED!", "--bg3_happy");
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+
+    changeUpdateText("UPDATE");
+};
+
 
 /** Generates an object with game data, then sends it */
 export async function writeScoreboard() {
@@ -106,6 +134,15 @@ export async function writeScoreboard() {
                 bgVid: players[i].vsBgSrc,
                 skin: players[i].vsSkin.name
             },
+            idleImg: players[i].idleBrowserSrc || players[i].idleSrc,
+            idleFC: players[i].idleFC,
+            idleY: players[i].idleY,
+            idleS: players[i].idleS,
+            tauntImg: players[i].tauntBrowserSrc || players[i].tauntSrc,
+            tauntFC: players[i].tauntFC,
+            tauntY: players[i].tauntY,
+            tauntS: players[i].tauntS,
+            iconImg: players[i].iconBrowserSrc || players[i].iconSrc,
             // these are just for remote updating
             char: players[i].char,
             skin: players[i].skin.name,
@@ -153,6 +190,12 @@ export async function writeScoreboard() {
         scoreboardJson.message = "RemoteUpdateGUI";
         remote.sendRemoteData(scoreboardJson);
 
+    }
+
+    if (!firstTimeUpdating) {
+        await scoreboardUpdated();
+    } else {
+        firstTimeUpdating = false;
     }
 
 }

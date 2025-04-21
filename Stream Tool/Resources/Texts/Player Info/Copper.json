@@ -1,0 +1,19 @@
+{
+  "name": "Copper",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Ori and Sein",
+      "skin": "Cyan"
+    }
+  ]
+}

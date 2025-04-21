@@ -1,0 +1,22 @@
+{
+  "name": "Hukon",
+  "tag": "",
+  "pronouns": "He/Him",
+  "twitter": "",
+  "twitch": "",
+  "yt": "",
+  "characters": [
+    {
+      "character": "Orcane",
+      "skin": "Default",
+      "hex": "4184-FFEF-EFFF-D100",
+      "customImg": true
+    },
+    {
+      "character": "Maypul",
+      "skin": "Default",
+      "hex": "AA51-3CFF-E6BE-B567-5741-2319-8C6F-5706",
+      "customImg": true
+    }
+  ]
+}

@@ -12,7 +12,8 @@ class Players {
 
         const pInfoEls = document.getElementsByClassName("pInfo");
         const pCharEls = document.getElementsByClassName("chara");
-        const pBgEls = document.getElementsByClassName("bgVid");
+        const pIconEls = document.getElementsByClassName("charIcon");
+        const pAnimEls = document.getElementsByClassName("animImg");
 
         // add new players to our array, max 4 players for 2v2
         for (let i = 0; i < 4; i++) {
@@ -22,11 +23,20 @@ class Players {
 
             // and create them
             this.#players.push(
-                new Player(wrapEl, pInfoEls[i], pCharEls[i], pBgEls[i], i+1)
+                new Player(wrapEl, pInfoEls[i], pCharEls[i], i+1, pIconEls[i], pAnimEls[i])
             );
 
         }
 
+    }
+
+    /**
+     * Gets the selected player class
+     * @param {Number} playerNumber - Player number, 0~3
+     * @returns {Player}
+     */
+    player(playerNumber) {
+        return this.#players[playerNumber];
     }
 
     /**
@@ -48,7 +58,7 @@ class Players {
             this.#players[i].updateInfo(data[i].pronouns, data[i].socials);
 
             // update character
-            charsLoaded.push(this.#players[i].updateChar(data[i].vs));
+            charsLoaded.push(this.#players[i].updateChar(data[i]));
 
         }
 

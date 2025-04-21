@@ -9,19 +9,21 @@
 </head>
 
 <body>
-    <div id="bgVids">
-        <video autoplay loop class="absol bgVid" id="vidBGP1"></video>
-        <video autoplay loop class="absol bgVid" id="vidBGP2"></video>
-        <div class="dubEL">
-            <video autoplay loop class="absol bgVid" id="vidBGP3"></video>
-            <video autoplay loop class="absol bgVid" id="vidBGP4"></video>
-        </div>
-    </div>
 
-    <div id="colorGrads">
-        <div class="colorBg" id="colorBgL"></div>
-        <div class="colorBg" id="colorBgR"></div>
-    </div>
+    <audio id="whoosh" src="Resources/Flooshes.mp3"></audio>
+    <audio id="seriousAudio" src="Resources/Serious.mp3"></audio>
+
+    <div id="everything">
+
+        <video autoplay loop id="bgVid" class="absol" src="Resources/Overlay/VS Screen/BG.mp4"></video>
+
+        <div id="introducing">
+            <div id="introTexts">
+                <div id="introTop"></div>
+                <div id="introBot"></div>
+            </div>
+        </div>
+
 
     <div id="charas">
         
@@ -65,7 +67,32 @@
             </div>
         </div>
 
+        <img id="foreGround" class="absol" src="Resources/Overlay/VS Screen/FG 0.png">
+        <video id="foreGroundOmega" class="absol" src="Resources/Overlay/VS Screen/FG Omega.webm" loop autoplay></video>
+
+        <div id="imExtraTired">
+            <div id="spriteDivL" class="spriteDiv absol">
+                <div class="spriteDivDiv">
+                    <div id="animDivL" class="animDiv">
+                        <img id="animImgL" class="animImg"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="imTired">
+            <div id="spriteDivR" class="spriteDiv absol">
+                <div class="spriteDivDiv">
+                    <div id="animDivR" class="animDiv">
+                        <img id="animImgR" class="animImg"></img>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
     </div>
+
+
 
     <div id="playerInfos">
         <div class="pInfo playerInfoDiv playerInfoDivL absol" id="playerInfoDivL"></div>
@@ -73,22 +100,19 @@
         <div class="pInfo playerInfoDiv2 absol dubEL" id="playerInfoDivL2"></div>
         <div class="pInfo playerInfoDiv2 absol dubEL" id="playerInfoDivR2"></div>
     </div>
-
-    <div class="textBGs">
-        <div class="textBg" id="textBgL"></div>
-        <div class="textBg" id="textBgR"></div>
-    </div>
     
     <div id="playerTexts">
 
         <span id="p1Wrapper" class="wrappers p1WSingles wrappersSingles">
             <span id="p1Tag" class="tag"></span>
             <span id="p1Name" class="name"></span>
+            <img class="charIcon" alt="">
         </span>
 
         <span id="p2Wrapper" class="wrappers p2WSingles wrappersSingles">
             <span id="p2Tag" class="tag"></span>
             <span id="p2Name" class="name"></span>
+            <img class="charIcon" alt="">
         </span>
 
         <div class="dubEL">
@@ -111,8 +135,6 @@
         </div>
 
     </div>
-
-    <img src="Resources/Overlay/VS Screen/VS Overlay.png" id="vsOverlay" class="absol" alt=""/>
 
     <div id="middleDivs">
 
@@ -172,9 +194,10 @@
 
             </div>
 
-        </div>
+        </div>        
 
     </div>
+    
 
     <div id="connErrorDiv">
         Can't connect with GUI, attempting to reconnect every 5 seconds...

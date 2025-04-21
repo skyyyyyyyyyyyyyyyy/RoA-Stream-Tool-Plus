@@ -1,0 +1,19 @@
+{
+  "name": "Bicycle",
+  "tag": "",
+  "pronouns": "",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Orcane",
+      "skin": "Default"
+    }
+  ]
+}

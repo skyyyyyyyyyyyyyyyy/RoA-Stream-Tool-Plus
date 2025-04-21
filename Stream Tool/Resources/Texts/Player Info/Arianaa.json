@@ -1,0 +1,20 @@
+{
+  "name": "Arianaa",
+  "tag": "",
+  "pronouns": "She/Her",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Orcane",
+      "skin": "Default",
+      "hex": "7CE9-A357-5757-5A00",
+      "customImg": true
+    }
+  ]
+}

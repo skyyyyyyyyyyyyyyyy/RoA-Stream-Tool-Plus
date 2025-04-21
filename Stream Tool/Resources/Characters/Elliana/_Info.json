@@ -208,5 +208,10 @@
             "y": 57,
             "scale": 7
         }
-    }
+    },
+    "idleFC": 7,
+    "idleY": 64,
+    "idleS": 6.5,
+    "tauntFC": 19,
+    "tauntY": 64
 }

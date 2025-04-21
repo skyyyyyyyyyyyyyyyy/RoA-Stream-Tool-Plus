@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RoA Stream Tool v10.1</title>
+  <title>︵‿︵‿ RoA Stream Tool+ ✦ Drag & drop a .roa file anywhere! ︵‿︵‿</title>
   <link rel="stylesheet" href="CSS/GUI.css">
   <link rel="stylesheet" href="CSS/GUI Custom.css">
   <script src="Scripts/GUI/mousetrap.min.js" defer></script>
@@ -43,6 +43,7 @@
             </div>
             
             <div id="lColor" class="pColor" tabindex="-1" title="Change the color slot for this player">
+              
               <div class="colorContainer">
                 <div id="lColorRect" class="pColorRect"></div>
               </div>
@@ -140,7 +141,6 @@
                 <input type="text" id="p2Name" class="textInput mousetrap nameInput" tabindex="2" placeholder="Player 2" title="Insert P2's name here." spellcheck="false">
               </div>
             </div>
-            
 
             <div id="rColor" class="pColor" tabindex="-1">
               <div class="colorContainer" title="Change the color slot for this player">
@@ -223,8 +223,7 @@
         <input type="number" id="roundNameNumber" class="textInput" value="1" tabindex="4" min="1">
 
         <input type="text" id="tournamentName" class="textInput mousetrap" placeholder="Tournament Name" spellcheck="false" tabindex="4">
-         
-
+        
         <div id="gamemode" title="Change the gamemode to Doubles">1v1</div>
 
       </div>
@@ -249,13 +248,20 @@
           <load-svg src="SVGs/Bracket.svg" id="bracketIcon"></load-svg>
         </button>
 
-        <button id="updateRegion" class="botRegion" title="Save current info to the json file. [Shortcut: Enter]">
+        <div id="uploadReplayButtonContainer">
+          <label for="replayUpload" class="botRegion" title="Upload a replay file">
+            <load-svg src="SVGs/Arrow_up.svg" id="uploadReplayIcon"></load-svg>
+          </label>
+          <input id="replayUpload" type="file" accept=".roa" onclick="this.value = null;" />
+        </div>
+
+        <button id="updateRegion" class="botRegion" title="Save current info to the json file [Shortcut: Enter]">
           <div class="rectangle"></div>
-          <span class="botText">UPDATE</span>
+          <span class="botText" id="updateText">UPDATE</span>
           <div class="rectangle"></div>
         </button>
 
-        <button id="settingsRegion" class="botRegion" title="Go to settings">
+        <button id="settingsRegion" class="botRegion" title="Go to settings [Shortcut: F6]">
           <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
         </button>
 
@@ -300,6 +306,11 @@ VS Screen even when LoA skins are selected.">
         </div>
 
         <div class="settingsTitle">GUI Settings</div>
+
+        <div class="settingBox" title="Enables replay uploads to input scores automatically.">
+          <input type="checkbox" id="replaysUpdateScore" class="settingsCheck" tabindex="-1">
+          <label for="replaysUpdateScore" class="settingsText">Replays update score</span>
+        </div>
 
         <div class="settingBox" title="Changes the character list to the workshop one.">
           <input type="checkbox" id="workshopToggle" class="settingsCheck" tabindex="-1">

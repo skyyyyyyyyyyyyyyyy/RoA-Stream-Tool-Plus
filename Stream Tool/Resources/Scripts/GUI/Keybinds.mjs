@@ -71,6 +71,16 @@ export function loadKeybinds() {
         if (settings.isScoreAutoChecked()) {writeScoreboard()};
     });
 
+    // settings toggle. i added this to lazily work around the bug where
+    // pressing F5 while settings is up shifts your viewport way to the right.
+    Mousetrap.bind('f6', () => {
+        if (inside.settings) {
+            viewport.toCenter();
+        } else {
+            viewport.toSettings();
+        }
+    });
+
     // up/down, to navigate the finders (only when one is shown)
     Mousetrap.bind('down', () => {
         if (playerFinder.isVisible()) {

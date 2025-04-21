@@ -41,6 +41,10 @@ class BestOf {
 
     }
 
+    getBo() {
+        return this.#bestOf;
+    }
+
 }
 
 export const bestOf = new BestOf;

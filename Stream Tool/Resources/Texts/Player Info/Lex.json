@@ -1,0 +1,19 @@
+{
+  "name": "Lex",
+  "tag": "",
+  "pronouns": "he/him",
+  "socials": {
+    "twitter": "",
+    "twitch": "",
+    "yt": "",
+    "bsky": "",
+    "masto": "",
+    "cohost": ""
+  },
+  "characters": [
+    {
+      "character": "Forsburn",
+      "skin": "Default"
+    }
+  ]
+}
