@@ -47,10 +47,6 @@ class Viewport {
 
     }
 
-    centerViewport() {
-        this.#moveViewport("0");
-    }
-
     /**
      * Changes the opacity of the base viewport for overlayed divs
      * @param {String} value CSS value for opacity
