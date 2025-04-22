@@ -134,15 +134,6 @@ export async function writeScoreboard() {
                 bgVid: players[i].vsBgSrc,
                 skin: players[i].vsSkin.name
             },
-            idleImg: players[i].idleBrowserSrc || players[i].idleSrc,
-            idleFC: players[i].idleFC,
-            idleY: players[i].idleY,
-            idleS: players[i].idleS,
-            tauntImg: players[i].tauntBrowserSrc || players[i].tauntSrc,
-            tauntFC: players[i].tauntFC,
-            tauntY: players[i].tauntY,
-            tauntS: players[i].tauntS,
-            iconImg: players[i].iconBrowserSrc || players[i].iconSrc,
             // these are just for remote updating
             char: players[i].char,
             skin: players[i].skin.name,
