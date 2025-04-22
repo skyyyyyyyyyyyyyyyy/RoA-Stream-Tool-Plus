@@ -106,7 +106,7 @@ export async function customChange(hex, skinName) {
     skin.force = true;
     
     // aaaaand change it
-    curPlayer.skinChange(skin);
+    await curPlayer.skinChange(skin);
 
     // we no longer want to see this menu
     hideCustomSkin();
