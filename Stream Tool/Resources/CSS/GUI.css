@@ -808,13 +808,14 @@ button:hover {
   background-color: var(--bg5);
 }
 
+/* for some reason, display: none; doesn't work directly inside the #uploadReplayInput tag...*/
 input[type="file"] {
   display: none;
 }
 
-#botBarBracket, #settingsRegion, #uploadReplayIcon {
+#botBarBracket, #settingsRegion, #uploadReplayButtonContainer {
   width: 32px;
-  background-color: var(--bg3)
+  background-color: var(--bg3);
 }
 
 #bracketIcon {
@@ -833,12 +834,12 @@ input[type="file"] {
   fill: var(--text2);
 }
 
-#botBarBracket:hover, #settingsRegion:hover, #uploadReplayIcon:hover {
+#botBarBracket:hover, #settingsRegion:hover, #uploadReplayInput:hover {
   background-color: var(--bg1);
   cursor: pointer;
 }
 
-#botBarBracket:active, #settingsRegion:active, #uploadReplayIcon:active {
+#botBarBracket:active, #settingsRegion:active, #uploadReplayInput:active {
   background-color: var(--bg5);
 }
 
