@@ -18,7 +18,7 @@ class GuiSettings {
     #HDCheck = document.getElementById('forceHD');
     #noLoACheck = document.getElementById('noLoAHD');
 
-    #replaysUpdateScoreCheck = document.getElementById('replaysUpdateScore');
+    #replaysDontUpdateScoreCheck = document.getElementById('replaysDontUpdateScore');
     #replaysAutoUpdateOverlay = document.getElementById('replaysAutoUpdateOverlay');
     #wsCheck = document.getElementById('workshopToggle');
     #customRound = document.getElementById('customRound');
@@ -48,8 +48,8 @@ class GuiSettings {
         this.#noLoACheck.addEventListener("click", () => {this.toggleNoLoA()});
 
         // gui settings listeners
-        this.#replaysUpdateScoreCheck.addEventListener("click", () => {
-            this.save("replaysUpdateScore", this.isReplaysUpdateScoreChecked())
+        this.#replaysDontUpdateScoreCheck.addEventListener("click", () => {
+            this.save("replaysDontUpdateScore", this.isReplaysDontUpdateScoreChecked())
         });
         this.#replaysAutoUpdateOverlay.addEventListener("click", () => {
             this.save("replaysAutoUpdateOverlay", this.isReplaysAutoUpdateOverlayChecked())
@@ -112,7 +112,7 @@ class GuiSettings {
         if (guiSettings.forceHD) this.#noLoACheck.disabled = false;
         this.#noLoACheck.checked = guiSettings.noLoAHD;
 
-        this.#replaysUpdateScoreCheck.checked = guiSettings.replaysUpdateScore;
+        this.#replaysDontUpdateScoreCheck.checked = guiSettings.replaysDontUpdateScore;
         this.#replaysAutoUpdateOverlay.checked = guiSettings.replaysAutoUpdateOverlay;
         this.#wsCheck.checked = guiSettings.workshop;
         if (guiSettings.workshop) this.#altArtCheck.disabled = false;
@@ -231,8 +231,8 @@ class GuiSettings {
     }
 
 
-    isReplaysUpdateScoreChecked() {
-        return this.#replaysUpdateScoreCheck.checked;
+    isReplaysDontUpdateScoreChecked() {
+        return this.#replaysDontUpdateScoreCheck.checked;
     }
 
     isReplaysAutoUpdateOverlayChecked() {

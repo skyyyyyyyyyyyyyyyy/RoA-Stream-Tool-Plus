@@ -54,7 +54,7 @@ async function updateGUIFromReplayFile(replayFile) {
         GUIPlayer.setName(replayPlayer.username);
 
         // don't want to update score for players 3 & 4, since each team uses p1 and p2 score
-        if (settings.isReplaysUpdateScoreChecked() && i < 2) {
+        if (!settings.isReplaysDontUpdateScoreChecked() && i < 2) {
             scores[i].setScore(replayPlayer.wins);
         }
 

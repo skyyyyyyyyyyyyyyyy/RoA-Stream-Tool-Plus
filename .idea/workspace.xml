@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebba0d10-05d3-4c76-b062-62c2a5d53b90" name="Changes" comment="Moved ST+ changes to the main build on GitHub, plus an extra setting and proper doubles functionality :)">
-      <change afterPath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Replays.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Bracket.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Bracket.mjs" afterDir="false" />
+    <list default="true" id="ebba0d10-05d3-4c76-b062-62c2a5d53b90" name="Changes" comment="Moved replay functions into their own file. I don't know why I was doing that shit in Bracket.mjs...">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stream Tool/Resources/GUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/Stream Tool/Resources/GUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Replays.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Replays.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Settings.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/Stream Tool/Resources/Scripts/GUI/Settings.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stream Tool/Resources/Texts/GUI Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Stream Tool/Resources/Texts/GUI Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +120,7 @@
       <workItem from="1745363967994" duration="180000" />
       <workItem from="1745364269406" duration="296000" />
       <workItem from="1745364576474" duration="136000" />
-      <workItem from="1745364714769" duration="13490000" />
+      <workItem from="1745364714769" duration="14368000" />
     </task>
     <task id="LOCAL-00001" summary="+ Added replay upload functionality! Use the upload button or just drag &amp; drop straight into the window!&#10;&#10;+ Added setting to disable replays updating the game count. This is for people who want to do it manually, and avoid the inherent potential errors from button check games, stage ban reset games, etc.&#10;&#10;+ Added warning to remember to update once a replay is uploaded&#10;&#10;+ Added fun colours for the replay button&#10;&#10;+ Made title bar more fun&#10;&#10;+ Maybe more stuff that I forgot...">
       <option name="closed" value="true" />
@@ -207,7 +210,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745396462048</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Moved replay functions into their own file. I don't know why I was doing that shit in Bracket.mjs...">
+      <option name="closed" value="true" />
+      <created>1745396793389</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745396793389</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Moved replay functions into their own file. I don't know why I was doing that shit in Bracket.mjs...">
+      <option name="closed" value="true" />
+      <created>1745396801596</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745396801596</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +255,8 @@
     <MESSAGE value="added space" />
     <MESSAGE value="okay nevermind for some reason this breaks the &quot;DONT FORGET TO UPDATE&quot; message, do not ask me why hahaha" />
     <MESSAGE value="Moved ST+ changes to the main build on GitHub, plus an extra setting and proper doubles functionality :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved ST+ changes to the main build on GitHub, plus an extra setting and proper doubles functionality :)" />
+    <MESSAGE value="Moved replay functions into their own file. I don't know why I was doing that shit in Bracket.mjs..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved replay functions into their own file. I don't know why I was doing that shit in Bracket.mjs..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
