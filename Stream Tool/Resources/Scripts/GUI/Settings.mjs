@@ -19,6 +19,7 @@ class GuiSettings {
     #noLoACheck = document.getElementById('noLoAHD');
 
     #replaysUpdateScoreCheck = document.getElementById('replaysUpdateScore');
+    #replaysAutoUpdateOverlay = document.getElementById('replaysAutoUpdateOverlay');
     #wsCheck = document.getElementById('workshopToggle');
     #customRound = document.getElementById('customRound');
     #forceWLCheck = document.getElementById('forceWLToggle');
@@ -49,6 +50,9 @@ class GuiSettings {
         // gui settings listeners
         this.#replaysUpdateScoreCheck.addEventListener("click", () => {
             this.save("replaysUpdateScore", this.isReplaysUpdateScoreChecked())
+        });
+        this.#replaysAutoUpdateOverlay.addEventListener("click", () => {
+            this.save("replaysAutoUpdateOverlay", this.isReplaysAutoUpdateOverlayChecked())
         });
         this.#wsCheck.addEventListener("click", () => {
             if (inside.electron) {
@@ -109,6 +113,7 @@ class GuiSettings {
         this.#noLoACheck.checked = guiSettings.noLoAHD;
 
         this.#replaysUpdateScoreCheck.checked = guiSettings.replaysUpdateScore;
+        this.#replaysAutoUpdateOverlay.checked = guiSettings.replaysAutoUpdateOverlay;
         this.#wsCheck.checked = guiSettings.workshop;
         if (guiSettings.workshop) this.#altArtCheck.disabled = false;
         if (guiSettings.customRound) this.#customRound.click();
@@ -228,6 +233,10 @@ class GuiSettings {
 
     isReplaysUpdateScoreChecked() {
         return this.#replaysUpdateScoreCheck.checked;
+    }
+
+    isReplaysAutoUpdateOverlayChecked() {
+        return this.#replaysAutoUpdateOverlay.checked;
     }
 
     setWs(value) {
@@ -393,6 +402,10 @@ class GuiSettings {
         this.#changeZoom();
         const ipc = await import("./IPC.mjs");
         ipc.defaultWindowDimensions();
+    }
+
+    restoreWindowDefaults() {
+        this.#restoreWindowDefaults();
     }
 
 }

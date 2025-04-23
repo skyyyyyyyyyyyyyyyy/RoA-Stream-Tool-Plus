@@ -1,5 +1,7 @@
 import { Player } from "./Player/Player.mjs";
 import { viewport } from "./Viewport.mjs";
+import {changeUpdateText} from "./Write Scoreboard.mjs";
+import {settings} from "./Settings.mjs";
 
 // set listeners for the custom skins menu
 document.getElementById("customSkinBackButt").addEventListener("click", hideCustomSkin);
@@ -67,7 +69,7 @@ function updateCustomSelect() {
     // for each skin that has a different recolorable image
     const skinList = curPlayer.charInfo.skinList;
     for (let i = 0; i < skinList.length; i++) {
-        if (skinList[i].force && skinList[i].name != "Default") {
+        if (skinList[i].force && skinList[i].name !== "Default") {
             addCustomEntry(skinList[i].name);
         }
     }
@@ -106,7 +108,11 @@ export async function customChange(hex, skinName) {
     skin.force = true;
     
     // aaaaand change it
-    curPlayer.skinChange(skin);
+    if (settings.isReplaysAutoUpdateOverlayChecked()) {
+        await curPlayer.skinChange(skin);
+    } else {
+        await curPlayer.skinChange(skin).then(() => changeUpdateText("DON'T FORGET TO UPDATE", "--bg3_angry"));
+    }
 
     // we no longer want to see this menu
     hideCustomSkin();

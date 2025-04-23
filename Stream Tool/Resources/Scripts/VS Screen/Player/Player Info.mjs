@@ -75,7 +75,7 @@ export class PlayerInfo {
      */
     async update(pronouns, socials) {
 
-        let delayTime = current.delay + .6;
+        let delayTime = introDelayVs + .6;
 
         // if not loading up
         if (!current.startup) {
@@ -221,7 +221,7 @@ export class PlayerInfo {
     /** Displays the text elements, fading them in */
     show() {
 
-        let delayTime = current.delay + .6;
+        let delayTime = introDelayVs + .6;
 
         for (let i = 0; i < this.#infoEl.children.length; i++) {
 

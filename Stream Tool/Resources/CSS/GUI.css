@@ -1261,16 +1261,3 @@ input[type="file"] {
 #caster1, #caster2 {
   display: none;
 }
-
-
-.pLvl, .stocksNum, #lowestSeedNum {
-  width: 36px;
-  outline: none;
-  border: 1px solid var(--bg4);
-  border-radius: 3px;
-  background-color: var(--bg4);
-  color: var(--text1);
-  font-family: 'Roboto-Medium';
-  font-size: 16px;
-  padding-left: 3px;
-}

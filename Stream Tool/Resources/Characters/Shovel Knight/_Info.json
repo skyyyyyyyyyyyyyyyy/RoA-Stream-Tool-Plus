@@ -143,11 +143,5 @@
             "scale": 4,
             "comment": "Also works for HD"
         }
-    },
-    "idleFC": 6,
-    "idleY": 64,
-    "idleS": 6.5,
-    "tauntFC": 9,
-    "tauntY": 64,
-    "tauntS": 4
+    }
 }

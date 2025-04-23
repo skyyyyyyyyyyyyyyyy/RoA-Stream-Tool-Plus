@@ -81,6 +81,11 @@ export function loadKeybinds() {
         }
     });
 
+    // just wanted an easier way to restore default dimensions...
+    Mousetrap.bind('f11', () => {
+        settings.restoreWindowDefaults();
+    });
+
     // up/down, to navigate the finders (only when one is shown)
     Mousetrap.bind('down', () => {
         if (playerFinder.isVisible()) {

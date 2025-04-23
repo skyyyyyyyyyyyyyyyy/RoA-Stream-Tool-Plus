@@ -15,16 +15,11 @@ import { saveSimpleTexts } from './File System.mjs';
 const updateDiv = document.getElementById('updateRegion');
 const updateText = updateDiv.getElementsByClassName("botText")[0];
 const updateRegion = document.getElementById('updateRegion');
-let yetToUpdate = false;
 let firstTimeUpdating = true;
 
 // bottom bar update button
 updateDiv.addEventListener("click", writeScoreboard);
 
-/** Allows Bracket.mjs to tell this file that the overlay hasn't been updated since a file was uploaded */
-export function setYetToUpdate(value) {
-    yetToUpdate = value;
-}
 
 /**
  * Warns the user that a player is not ready to update yet
@@ -33,12 +28,7 @@ export function setYetToUpdate(value) {
 export function readyToUpdate(state) {
     if (state) {
         if (playersReady()) {
-            if (yetToUpdate) {
-                changeUpdateText("DON'T FORGET TO UPDATE", "--bg3_angry");
-                yetToUpdate = false;
-            } else {
-                changeUpdateText("UPDATE");
-            }
+            changeUpdateText("UPDATE");
             updateDiv.style.pointerEvents = "auto";
         }
     } else {
@@ -184,7 +174,7 @@ export async function writeScoreboard() {
     }
 
     if (!firstTimeUpdating) {
-        await scoreboardUpdated();
+        scoreboardUpdated();
     } else {
         firstTimeUpdating = false;
     }

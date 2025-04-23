@@ -11,16 +11,6 @@
 :root {
     --colorL: #14bb89;
     --colorR: #14bb89;
-    --spriteWidth1: 0px;
-    --spriteTime1: 0s;
-    --spriteCount1: 0;
-    --spriteWidth2: 0px;
-    --spriteTime2: 0s;
-    --spriteCount2: 0;
-    --hpColor: var(--healthy);
-    --healthy: #17960e;
-    --warning: #b3a312;
-    --winner: #1676c4;
 }
 
 
@@ -51,7 +41,16 @@ body {
     background-color: var(--colorR);
 }
 
-
+.singlesClip {
+    width: 1920px;
+    height: 1080px;
+    clip: rect(0px, 960px, 1080px, 0px);
+}
+.dubsClip {
+    width: 1920px;
+    height: 1080px;
+    clip: rect(100px, 960px, 700px, 0px);
+}
 
 .mirrorP2 {
     position: absolute;
@@ -115,33 +114,39 @@ body {
 .playerInfoDiv {
     display: flex;
     flex-wrap: wrap-reverse;
-    gap: 8px;
+    gap: 15px;
+    transform: rotate(-3.3deg);
     width: 940px;
     overflow: hidden;
-    font-size: 22px;
-    bottom: 40px;
+    font-size: 28px;
 }
 .playerInfoDivL {
-    left: 42px;
+    bottom: 223px;
+    left: 12px;
     transform-origin: bottom left;
 }
 .playerInfoDivL1 {
+    top: 130px;
     left: 42px;
     align-items: flex-start;
 }
 .playerInfo1L {
+    transform: rotate(-3.3deg);
     transform-origin: top left;
 }
 .playerInfoDivR {
-    right: 42px;
+    right: 12px;
+    bottom: 278px;
     transform-origin: top right;
     flex-direction: row-reverse;
 }
 .playerInfoDivR1 {
+    top: 130px;
     right: 42px;
     align-items: flex-end;
 }
 .playerInfo1R {
+    transform: rotate(3.3deg);
     transform-origin: top right;
 }
 
@@ -160,6 +165,7 @@ body {
     align-items: flex-start;
 }
 .playerInfo2L {
+    transform: rotate(3.3deg);
     transform-origin: bottom left;
 }
 #playerInfoDivR2 {
@@ -169,6 +175,7 @@ body {
     align-items: flex-end;
 }
 .playerInfo2R {
+    transform: rotate(-3.3deg);
     transform-origin: bottom right;
 }
 
@@ -181,8 +188,8 @@ body {
     color: white;
     white-space: nowrap;
     padding: 5px 10px;
-    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, .7));
-    border: solid 2px white;
+    border-radius: 5px;
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
 .playerInfoText {
@@ -195,33 +202,33 @@ body {
     filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.5));
 }
 .playerInfoIconTwitter {
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     transform: translate(0px, 2px);
 }
 .playerInfoIconTwitch {
-    height: 21px;
-    width: 21px;
+    height: 23px;
+    width: 23px;
     transform: translate(0px, 2px);
 }
 .playerInfoIconYt {
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     transform: translate(0px, 2px);
 }
 .playerInfoIconBsky {
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     transform: translate(0px, 0px);
 }
 .playerInfoIconMasto {
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     transform: translate(0px, 2px);
 }
 .playerInfoIconCohost {
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     transform: translate(0px, -1px);
 }
 
@@ -291,16 +298,14 @@ body {
     white-space: nowrap;
     text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
     opacity: 0;
-    filter: drop-shadow(0px 0px 5px black);
 }
 
 .wrappersSingles {
-    width: 500px;
-    height: 70px;
-    padding: 0px 20px;
-    bottom: 93px;
-    line-height: 66px;
-    border: 5px solid white;
+    transform: rotate(-3deg);
+    width: 940px;
+    height: 120px;
+    bottom: 90px;
+    line-height: 90px;
 }
 .wrappersDoubles {
     width: 300px;
@@ -313,32 +318,34 @@ body {
 }
 
 .p1WSingles {
-    left: 42px;
-    background-color: var(--colorL);
-    
+    left: 10px;
 }
 .p2WSingles {
-    right: 42px;
-    background-color: var(--colorR);
+    right: 10px;
 }
+
 .p1WDub {
     top: 50px;
     left: 40px;
+    transform: rotate(-3.3deg);
     background-color: var(--colorL);
 }
 .p2WDub {
     top: 50px;
     right: 40px;
+    transform: rotate(3.3deg);
     background-color: var(--colorR);
 }
 #p3Wrapper {
     bottom: 50px;
     left: 40px;
+    transform: rotate(3.3deg);
     background-color: var(--colorL);
 }
 #p4Wrapper {
     bottom: 50px;
     right: 40px;
+    transform: rotate(-3.3deg);
     background-color: var(--colorR);
 }
 
@@ -626,87 +633,6 @@ body {
     display: none;
 }
 
-
-#botRow, #topRow {
-    opacity: .6;
-}
-
-.charIcon {
-    image-rendering: pixelated;
-    width: 45px;
-    height: 45px;
-    transform: translate(0px, 4px);
-    object-fit: contain;
-    opacity: .95;
-    padding-left: 4px;
-}
-
-
-.spriteDiv {
-    width: 1920px;
-    position: absolute;
-    bottom: 305px; /* base */
-    image-rendering: pixelated;
-    opacity: 0;
-}
-#imTired {
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    transform: scaleX(-1);
-}
-#imExtraTired {
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    transform: translateY(-1px);
-}
-
-.spriteDivDiv {
-    width: 1000px;
-    height: 600px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    transform: translateX(250px);
-    display: flex;
-}
-
-.animDiv {
-    overflow: hidden;
-}
-#animDivL {
-    width: calc(var(--spriteWidth1) / var(--spriteCount1) * 2); /* gets the w of 1 frame */
-}
-#animDivR {
-    width: calc(var(--spriteWidth2) / var(--spriteCount2) * 2); /* gets the w of 1 frame */
-}
-#animImgL {
-    animation: moveSprite1 var(--spriteTime1) steps(var(--spriteCount1)) infinite;
-    min-width: calc(var(--spriteWidth1) * 2);
-}
-@keyframes moveSprite1 {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(calc(-1 * var(--spriteWidth1) * 2));
-    }
-}
-#animImgR {
-    animation: moveSprite2 var(--spriteTime2) steps(var(--spriteCount2)) infinite;
-    min-width: calc(var(--spriteWidth2) * 2);
-}
-@keyframes moveSprite2 {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(calc(-1 * var(--spriteWidth2) * 2));
-    }
-}
-
-
 /* Animations! */
 
 @keyframes fadeOut {
@@ -737,217 +663,4 @@ body {
 @keyframes trailMoveIn {
     from {transform: translateX(0px)}
     to {transform: translateX(-30px)}
-}
-
-@keyframes moveOutLeft {
-    from {transform: translateX(0)}
-    to {transform: translateX(40px)}
-}
-@keyframes moveOutRight {
-    from {transform: translateX(0)}
-    to {transform: translateX(-40px)}
-}
-
-
-@keyframes moveInLeft {
-    from {transform: translateX(-40px)}
-    to {transform: translateX(0)}
-}
-@keyframes moveInRight {
-    from {transform: translateX(40px)}
-    to {transform: translateX(0)}
-}
-
-
-
-#introducing {
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.5);
-    text-align: center;
-    opacity: 0;
-}
-
-#introTexts {
-    width: 110%;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px;
-    transform: translateY(-80px);
-
-}
-
-#introTop {
-    font-family: "Deansgate";
-    opacity: 0;
-    font-size: 40px;
-    color: lightgray;
-    filter: drop-shadow(0px 0px 4px black);
-    margin-bottom: -20px;
-    line-height: 55px;
-}
-#introBot {
-    font-family: "LemonMilk";
-    opacity: 0;
-    font-size: 80px;
-    color: white;
-    filter: drop-shadow(0px 0px 4px black);
-}
-.animTop {
-    animation: topMove 3s .3s;
-}
-.animBot {
-    animation: botMove 3s .3s;
-}
-
-@keyframes topMove {
-    0% {opacity: 0; transform: translateX(-150px);}
-    20% {opacity: 1; transform: translateX(0px);}
-    75% {opacity: 1; transform: translateX(0px);}
-    100% {opacity: 0; transform: translateX(150px);}
-}
-@keyframes botMove {
-    0% {opacity: 0; transform: translateX(150px);}
-    25% {opacity: 1; transform: translateX(0px);}
-    75% {opacity: 1; transform: translateX(0px);}
-    100% {opacity: 0; transform: translateX(-150px);}
-}
-
-#everything {
-    width: 1920px;
-    height: 1080px;
-}
-@keyframes moveEverything {
-    0% {transform: scale(1);}
-    20% {transform: scale(1.3);}
-    80% {transform: scale(1.3);}
-    100% {transform: scale(1);}
-}
-
-
-#lvlBars {
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    font-size: 24px;
-    font-family: "Deansgate";
-    color: white;
-    white-space: nowrap;
-    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, .7));
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-
-.lvlBar {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.lvlDiv {
-    position: absolute;
-    left: 66px;
-    bottom: 186px;
-}
-.lvlText {
-    position: absolute;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    bottom: -3px;
-    left: 13px;
-}
-.lvlBg {
-    position: absolute;
-    height: 36px;
-    width: 120px;
-    border: 3px white solid;
-    transform: skewX(-45deg);
-    bottom: -7px;
-}
-#lvlBgL {
-    background-color: var(--colorL);
-}
-#lvlBgR {
-    background-color: var(--colorR);
-}
-
-.hpBarDiv {
-    position: absolute;
-    width: 406px;
-    height: 36px;
-    border: 3px white solid;
-    transform: skewX(-45deg);
-    bottom: 179px;
-    left: 200px;
-    overflow: hidden;
-}
-.hpBar {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-.hpBarFull {
-    background-color: rgb(77, 77, 77);
-}
-.hpBarActive {
-    background-color: var(--hpColor);
-}
-.hpBarActive {
-    background-color: var(--hpColor);
-}
-.hpBarWinner {
-    background-color: var(--winner);
-}
-.hpBarBright {
-    background: linear-gradient(#ffffff40, #ffffff00);
-}
-.hpText {
-    /* transform: translate(2px, -4px); */
-    width: 406px;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 183px;
-    left: 202px;
-}
-
-
-.sickFlip {
-    transform: scaleX(-1);
-}
-.flipBack {
-    transform: scaleX(-1);
-}
-
-
-#foreGround, #foreGroundOmega {
-    transform: translateY(52px);
-}
-#foreGroundOmega {
-    display: none;
-    clip: rect(717px, 1920px, 1080px, 0px);
-}
-
-@keyframes moveEverythingSerious {
-    0% {transform: scale(1.3) translateY(-130px)}
-    25% {transform: scale(1.3) translateY(0);}
-    90% {transform: scale(1.3);}
-    100% {transform: scale(1);}
-}
-
-@keyframes charaMoveSerious {
-    0% {transform: translateY(-50px)}
-    100% {transform: translateY(0)}
-}
-
-@keyframes animsSerious {
-    0% {filter: brightness(0);}
-    100% {filter: brightness(1);}
 }

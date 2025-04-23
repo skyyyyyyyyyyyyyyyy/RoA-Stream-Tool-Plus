@@ -9,7 +9,7 @@ import {customChange, setCurrentPlayer} from "./Custom Skin.mjs";
 import {getJson} from "./File System.mjs";
 import {Score} from "./Score/Score.mjs";
 import {settings} from "./Settings.mjs";
-import {setYetToUpdate} from "./Write Scoreboard.mjs";
+import {writeScoreboard} from "./Write Scoreboard.mjs";
 
 const bRoundSelect = document.getElementById('bracketRoundSelect');
 const bEncountersDiv = document.getElementById('bracketEncounters');
@@ -62,6 +62,9 @@ async function fileUploadButton(event) {
 async function fileUploadDragDrop(event) {
     event.preventDefault();
 
+    // if elsewhere, drag & drop takes you back to the main screen
+    viewport.toCenter();
+
     const file = event.dataTransfer.files.item(0);
 
     if (file.name.split(".").pop() === "roa"){
@@ -78,7 +81,7 @@ async function updateGUIFromReplayFile(replayFile) {
 
     let replay = readReplayFile(replayFile);
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < replay.player.length; i++) {
         let GUIPlayer = players[i];
         let replayPlayer = replay.player[i];
 
@@ -90,7 +93,8 @@ async function updateGUIFromReplayFile(replayFile) {
 
         GUIPlayer.setName(replayPlayer.username);
 
-        if (settings.isReplaysUpdateScoreChecked()){
+        // don't want to update score for players 3 & 4, since each team uses p1 and p2 score
+        if (settings.isReplaysUpdateScoreChecked() && i < 2) {
             scores[i].setScore(replayPlayer.wins);
         }
 
@@ -98,13 +102,15 @@ async function updateGUIFromReplayFile(replayFile) {
         await customChange(replayPlayer.skinCode, replayPlayer.taunt);
     }
 
-    setYetToUpdate(true);
+    if (settings.isReplaysAutoUpdateOverlayChecked()) {
+        await writeScoreboard();
+    }
 }
 
 
 /**
  * Creates encounter divs for the bracket section when changing round
- * @param {Boolean} - If we're on the same round as before
+ * @param {Boolean} sameRound - If we're on the same round as before
  */
 async function createEncounters(sameRound) {
 
@@ -169,7 +175,7 @@ async function createEncounters(sameRound) {
         bracketPlayers[i].skinChange(bracketData[bRoundSelect.value][i].skin);
         bracketPlayers[i].setFinderListeners();
 
-        if (i%2 == 0) {
+        if (i%2 === 0) {
 
             // create a new bracket group
             const groupDiv = document.createElement('div');
@@ -215,7 +221,7 @@ async function copyFromGameToBracket() {
         bracketPlayers[num+i].setTag(players[i].tag);
         bracketPlayers[num+i].setScore(scores[i].getScore());
         await bracketPlayers[num+i].charChange(players[i].char, true);
-        bracketPlayers[num+i].skinChange(players[i].skin);
+        await bracketPlayers[num + i].skinChange(players[i].skin);
     }
 
 }

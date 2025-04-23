@@ -45,13 +45,11 @@ export class Team {
     /** Hides some stuff when browser goes out of view */
     hide() {
         this.#tName.hide();
-        this.#tScore.hide();
     }
 
     /** Display elements and animations when user comes back to the browser */
     show() {
         this.#tName.show();
-        this.#tScore.show();
     }
 
 }

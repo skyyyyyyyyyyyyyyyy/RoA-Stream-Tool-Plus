@@ -1,20 +1,21 @@
 {
-  "guiWidth": 590,
-  "guiHeight": 290,
-  "allowIntro": true,
+  "guiWidth": 600,
+  "guiHeight": 300,
+  "allowIntro": false,
   "workshop": false,
   "forceAlt": false,
   "forceHD": false,
   "noLoAHD": false,
-  "replaysUpdateScore": true,
   "forceWL": false,
   "customRound": false,
   "invertScore": false,
-  "scoreAutoUpdate": true,
+  "scoreAutoUpdate": false,
   "simpleTexts": false,
-  "alwaysOnTop": true,
+  "alwaysOnTop": false,
   "resizable": false,
   "zoom": 100,
   "remoteUpdatePort": 1111,
-  "webSocketPort": 8080
+  "webSocketPort": 8080,
+  "replaysUpdateScore": true,
+  "replaysAutoUpdateOverlay": true
 }

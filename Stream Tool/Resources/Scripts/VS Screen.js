@@ -1,17 +1,12 @@
-import { fadeIn } from "./Utils/Fade In.mjs";
-import { fadeOut } from "./Utils/Fade Out.mjs";
-import { genRnd } from "./Utils/Gen Random Num.mjs";
 import { current } from "./Utils/Globals.mjs";
 import { initOnBrowserActive, isBrowserActive } from "./Utils/On Transition Event.mjs";
 import { initWebsocket } from "./Utils/WebSocket.mjs";
 import { bestOf } from "./VS Screen/BestOf.mjs";
 import { casters } from "./VS Screen/Caster/Casters.mjs";
 import { gamemode } from "./VS Screen/Gamemode Change.mjs";
-import { vsIntro } from "./VS Screen/Intro.mjs";
 import { players } from "./VS Screen/Player/Players.mjs";
 import { roundInfo } from "./VS Screen/Round Info/Round Info.mjs";
 import { teams } from "./VS Screen/Team/Teams.mjs";
-import { fadeInTimeVs, fadeOutTimeVs, introDelayVs } from "./VS Screen/VsGlobals.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -36,8 +31,6 @@ initWebsocket("gameData", (data) => updateData(data));
  */
 function updateData(data) {
 
-	vsIntro.updateData(data);
-
 	// there are some things that we want to happen only once
 	if (firstUpdate) {
 
@@ -46,12 +39,6 @@ function updateData(data) {
 
 	}
 
-	if (current.startup) {
-
-
-		
-	}
-	
 	// if this isnt a singles match, rearrange stuff
 	gamemode.update(data.gamemode);
 
@@ -62,7 +49,7 @@ function updateData(data) {
 	players.update(data.player);
 
 	// update everything related to teams (names, score, color)
-	teams.update(data.teamName, data.color, data.score, data.lvl, data.wl);
+	teams.update(data.teamName, data.color, data.score);
 
 	// update round and tournament text
 	roundInfo.update(data.tournamentName, data.round);
@@ -96,8 +83,6 @@ function hideElements() {
 	
 	current.startup = true;
 
-	vsIntro.reset();
-
 	// hide some stuff so we save on some resources
 	players.hide();
 	teams.hide();
@@ -114,12 +99,8 @@ function showElements() {
 	// the user tabs back, displaying everything for around 1 frame
 	
 	// display and animate hidden stuff
-	setTimeout(() => {
-		vsIntro.play();
-		players.show();
-		teams.show();
-	}, 0);
-	
+	players.show();
+	teams.show();
 	
 	current.startup = false;
 
