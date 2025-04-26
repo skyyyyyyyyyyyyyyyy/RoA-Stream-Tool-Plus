@@ -35,9 +35,6 @@ let previousRound;
 
 // its always good to listen closely
 document.getElementById('botBarBracket').addEventListener("click", () => {viewport.toBracket()});
-document.getElementById('replayUpload').addEventListener("change", (event) => {fileUploadButton(event)});
-document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
-document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
 bRoundSelect.addEventListener("change", () => {createEncounters()});
 document.getElementById('bracketGoBack').addEventListener("click", () => {viewport.toCenter()});
 document.getElementById('bracketUpdate').addEventListener("click", () => {updateBracket()});

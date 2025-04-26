@@ -8,6 +8,10 @@ import {settings} from "./Settings.mjs";
 import {scores} from "./Score/Scores.mjs";
 import {writeScoreboard} from "./Write Scoreboard.mjs";
 
+document.getElementById('replayUpload').addEventListener("change", (event) => {fileUploadButton(event)});
+document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
+document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
+
 
 export async function fileUploadButton(event) {
     event.preventDefault();
@@ -27,12 +31,11 @@ export async function fileUploadDragDrop(event) {
 
     const file = event.dataTransfer.files.item(0);
 
-    if (file.name.split(".").pop() === "roa"){
+    if (file.name.split(".").pop() === "roa") {
         const replayFile = await file.text();
 
         await updateGUIFromReplayFile(replayFile);
-    }
-    else alert("That is NOT a .roa file!");
+    } else alert("That is NOT a .roa file!");
 
 }
 
