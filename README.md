@@ -1,4 +1,4 @@
-
+<h2>NOTE: This branch is a modification of the FRC version of the stream tool, which was uploaded to Readek's socials. The branch 'for-main-branch' builds off the main GitHub-available branch. <3</h2>
 <p align="center">
 
   <img src="https://github.com/Readek/RoA-Stream-Tool/blob/master/preview.png" alt="Preview">
