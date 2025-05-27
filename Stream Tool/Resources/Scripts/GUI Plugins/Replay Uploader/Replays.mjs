@@ -55,7 +55,7 @@ document.getElementById('replayUpload').addEventListener("change", (event) => {f
 // event listener for drag-and-drop file upload
 document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
 
-// prevents default dragover behaviour, which blocks the file drop
+// prevents default viewport dragover behaviour, which blocks the file drop
 document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
 
 
