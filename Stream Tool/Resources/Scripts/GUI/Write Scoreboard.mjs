@@ -15,7 +15,6 @@ import { saveSimpleTexts } from './File System.mjs';
 const updateDiv = document.getElementById('updateRegion');
 const updateText = updateDiv.getElementsByClassName("botText")[0];
 const updateRegion = document.getElementById('updateRegion');
-let firstTimeUpdating = true;
 
 // bottom bar update button
 updateDiv.addEventListener("click", writeScoreboard);
@@ -38,26 +37,9 @@ export function readyToUpdate(state) {
 }
 
 /** Changes the text displayed on the update button */
-export function changeUpdateText(text, style) {
+export function changeUpdateText(text) {
     updateText.innerHTML = text;
-    if (style) {
-        updateDiv.style.backgroundColor = `var(${style})`;
-    }
-    else {
-        updateDiv.style.backgroundColor = "";
-    }
 }
-
-
-/** Adds delay to green background colour when pressing update button */
-const scoreboardUpdated = async () => {
-    changeUpdateText("UPDATED!", "--bg3_happy");
-
-    await new Promise(resolve => setTimeout(resolve, 400));
-
-    changeUpdateText("UPDATE");
-};
-
 
 /** Generates an object with game data, then sends it */
 export async function writeScoreboard() {
@@ -104,7 +86,7 @@ export async function writeScoreboard() {
     };
 
     //add the player's info to the player section of the json
-    const playerNum = gamemode.getGm() === 1 ? 2 : 4; // add only 2 players if singles
+    const playerNum = gamemode.getGm() == 1 ? 2 : 4; // add only 2 players if singles
     for (let i = 0; i < playerNum; i++) {
 
         // finally, add it to the main json
@@ -171,12 +153,6 @@ export async function writeScoreboard() {
         scoreboardJson.message = "RemoteUpdateGUI";
         remote.sendRemoteData(scoreboardJson);
 
-    }
-
-    if (!firstTimeUpdating) {
-        scoreboardUpdated();
-    } else {
-        firstTimeUpdating = false;
     }
 
 }

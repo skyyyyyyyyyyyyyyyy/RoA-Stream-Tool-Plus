@@ -15,11 +15,8 @@
   --bg1: #131318;
   --bg2: #383838;
   --bg3: #1e1e24;
-  --bg3_angry: #390000;
-  --bg3_happy: #103200;
   --bg4: #444444b6;
   --bg5: #2b2b2b;
-  --bg6: #272729;
   --selected: #2ba4eb;
   --focused: #686868;
   --iconFill: #b6b6b6;
@@ -797,35 +794,21 @@ button:hover {
   background-color: var(--text2);
 }
 
-#updateRegion {
-  transition: background-color 0.1s;
-}
-
 #updateRegion:hover {
-  background-color: var(--bg6);
+  background-color: var(--bg3);
 }
 #updateRegion:active{
   background-color: var(--bg5);
 }
 
-/* for some reason, display: none; doesn't work directly inside the #uploadReplayInput tag...*/
-input[type="file"] {
-  display: none;
-}
-
-#botBarBracket, #settingsRegion, #uploadReplayButtonContainer {
+#botBarBracket, #settingsRegion {
   width: 32px;
-  background-color: var(--bg3);
+  background-color: var(--bg3)
 }
 
 #bracketIcon {
   width: 22px;
   height: 22px;
-  color: var(--text2);
-}
-#uploadReplayIcon {
-  width: 28px;
-  height: 28px;
   color: var(--text2);
 }
 #configIcon {
@@ -834,12 +817,11 @@ input[type="file"] {
   fill: var(--text2);
 }
 
-#botBarBracket:hover, #settingsRegion:hover, #uploadReplayInput:hover {
+#botBarBracket:hover, #settingsRegion:hover {
   background-color: var(--bg1);
-  cursor: pointer;
 }
 
-#botBarBracket:active, #settingsRegion:active, #uploadReplayInput:active {
+#botBarBracket:active, #settingsRegion:active{
   background-color: var(--bg5);
 }
 

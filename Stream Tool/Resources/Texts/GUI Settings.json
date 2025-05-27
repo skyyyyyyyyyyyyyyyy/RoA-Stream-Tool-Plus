@@ -15,7 +15,5 @@
   "resizable": false,
   "zoom": 100,
   "remoteUpdatePort": 1111,
-  "webSocketPort": 8080,
-  "replaysDontUpdateScore": false,
-  "replaysAutoUpdateOverlay": false
+  "webSocketPort": 8080
 }

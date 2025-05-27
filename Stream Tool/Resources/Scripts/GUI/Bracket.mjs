@@ -1,11 +1,9 @@
-import {viewport} from './Viewport.mjs';
-import {bracketPlayers, players} from './Player/Players.mjs';
-import {PlayerBracket} from "./Player/Player Bracket.mjs";
-import {displayNotif} from './Notifications.mjs';
-import {scores} from './Score/Scores.mjs';
-import {inside} from './Globals.mjs';
-import {Score} from "./Score/Score.mjs";
-import {fileUploadButton, fileUploadDragDrop} from "./Replays.mjs";
+import { viewport } from './Viewport.mjs';
+import { bracketPlayers, players } from './Player/Players.mjs';
+import { PlayerBracket } from "./Player/Player Bracket.mjs";
+import { displayNotif } from './Notifications.mjs';
+import { scores } from './Score/Scores.mjs';
+import { inside } from './Globals.mjs';
 
 const bRoundSelect = document.getElementById('bracketRoundSelect');
 const bEncountersDiv = document.getElementById('bracketEncounters');
@@ -42,12 +40,9 @@ document.getElementById('bracketUpdate').addEventListener("click", () => {update
 bRoundSelect.dispatchEvent(new Event('change'));
 
 
-
-
-
 /**
  * Creates encounter divs for the bracket section when changing round
- * @param {Boolean} sameRound - If we're on the same round as before
+ * @param {Boolean} - If we're on the same round as before
  */
 async function createEncounters(sameRound) {
 
@@ -112,7 +107,7 @@ async function createEncounters(sameRound) {
         bracketPlayers[i].skinChange(bracketData[bRoundSelect.value][i].skin);
         bracketPlayers[i].setFinderListeners();
 
-        if (i%2 === 0) {
+        if (i%2 == 0) {
 
             // create a new bracket group
             const groupDiv = document.createElement('div');
@@ -158,7 +153,7 @@ async function copyFromGameToBracket() {
         bracketPlayers[num+i].setTag(players[i].tag);
         bracketPlayers[num+i].setScore(scores[i].getScore());
         await bracketPlayers[num+i].charChange(players[i].char, true);
-        await bracketPlayers[num + i].skinChange(players[i].skin);
+        bracketPlayers[num+i].skinChange(players[i].skin);
     }
 
 }
