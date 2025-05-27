@@ -1,28 +1,24 @@
-import {viewport} from "./Viewport.mjs";
+import {viewport} from "../GUI/Viewport.mjs";
 import {readReplayFile} from "./Replay Reader/Replay Reader.mjs";
-import {players} from "./Player/Players.mjs";
-import {getJson} from "./File System.mjs";
-import {stPath} from "./Globals.mjs";
-import {customChange, setCurrentPlayer} from "./Custom Skin.mjs";
-import {settings} from "./Settings.mjs";
-import {scores} from "./Score/Scores.mjs";
-import {writeScoreboard} from "./Write Scoreboard.mjs";
+import {players} from "../GUI/Player/Players.mjs";
+import {getJson} from "../GUI/File System.mjs";
+import {stPath} from "../GUI/Globals.mjs";
+import {customChange, setCurrentPlayer} from "../GUI/Custom Skin.mjs";
+import {scores} from "../GUI/Score/Scores.mjs";
+import {displayNotif} from "../GUI/Notifications.mjs";
 
-document.getElementById('replayUpload').addEventListener("change", (event) => {fileUploadButton(event)});
+
+// event listener for file upload
 document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
+
+// prevents default dragover behaviour, which blocks the file drop
 document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
 
 
-export async function fileUploadButton(event) {
-    event.preventDefault();
-
-    const file = event.target.files.item(0);
-    const replayFile = await file.text();
-
-    await updateGUIFromReplayFile(replayFile);
-}
-
-
+/**
+ * Handles uploading a replay file via drag and drop.
+ * @param event {DragEvent} - The drag and drop event that contains the uploaded file.
+ */
 export async function fileUploadDragDrop(event) {
     event.preventDefault();
 
@@ -31,15 +27,20 @@ export async function fileUploadDragDrop(event) {
 
     const file = event.dataTransfer.files.item(0);
 
+    // check if the file is a .roa file
     if (file.name.split(".").pop() === "roa") {
         const replayFile = await file.text();
+        updateGUIFromReplayFile(replayFile);
 
-        await updateGUIFromReplayFile(replayFile);
     } else alert("That is NOT a .roa file!");
 
 }
 
-
+/**
+ * Transfers the replay file data into the GUI.
+ * Notably, does not update OBS immediately. Do that yourself.
+ * @param replayFile {string} - The content of the replay file to be processed.
+ */
 async function updateGUIFromReplayFile(replayFile) {
 
     let replay = readReplayFile(replayFile);
@@ -57,15 +58,14 @@ async function updateGUIFromReplayFile(replayFile) {
         GUIPlayer.setName(replayPlayer.username);
 
         // don't want to update score for players 3 & 4, since each team uses p1 and p2 score
-        if (!settings.isReplaysDontUpdateScoreChecked() && i < 2) {
+        if (i < 2) {
             scores[i].setScore(replayPlayer.wins);
         }
 
         await GUIPlayer.charChange(replayPlayer.character, true);
-        await customChange(replayPlayer.skinCode, replayPlayer.taunt);
-    }
-
-    if (settings.isReplaysAutoUpdateOverlayChecked()) {
-        await writeScoreboard();
+        customChange(replayPlayer.skinCode, replayPlayer.taunt);
     }
 }
+
+
+displayNotif("Drag and drop a .roa file!");
