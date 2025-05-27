@@ -1,17 +1,17 @@
-import {viewport} from "../GUI/Viewport.mjs";
+import {viewport} from "../../GUI/Viewport.mjs";
 import {readReplayFile} from "./Replay Reader/Replay Reader.mjs";
-import {players} from "../GUI/Player/Players.mjs";
-import {getJson} from "../GUI/File System.mjs";
-import {stPath} from "../GUI/Globals.mjs";
-import {customChange, setCurrentPlayer} from "../GUI/Custom Skin.mjs";
-import {scores} from "../GUI/Score/Scores.mjs";
-import {displayNotif} from "../GUI/Notifications.mjs";
+import {players} from "../../GUI/Player/Players.mjs";
+import {getJson} from "../../GUI/File System.mjs";
+import {stPath} from "../../GUI/Globals.mjs";
+import {customChange, setCurrentPlayer} from "../../GUI/Custom Skin.mjs";
+import {scores} from "../../GUI/Score/Scores.mjs";
+import {displayNotif} from "../../GUI/Notifications.mjs";
 
 
 const uploadButtonHTML = `
 <div id="uploadReplayButtonContainer">
   <label id="uploadReplayInput" for="replayUpload" class="botRegion" title="Upload a replay file">
-    <load-svg src="Scripts/GUI Plugins/Arrow_up.svg" id="uploadReplayIcon"></load-svg>
+    <load-svg src="Scripts/GUI Plugins/Replay Uploader/Arrow_up.svg" id="uploadReplayIcon"></load-svg>
   </label>
   <input id="replayUpload" type="file" accept=".roa" onclick="this.value = null;" />
 </div>`
@@ -129,4 +129,4 @@ async function updateGUIFromReplayFile(replayFile) {
 }
 
 
-displayNotif("Drag and drop a .roa file!");
+displayNotif("Loaded 'Replay Uploader' (Drag and drop a .roa file!)");
