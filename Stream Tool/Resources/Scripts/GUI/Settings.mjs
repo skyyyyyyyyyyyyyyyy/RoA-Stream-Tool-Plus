@@ -18,14 +18,12 @@ class GuiSettings {
     #HDCheck = document.getElementById('forceHD');
     #noLoACheck = document.getElementById('noLoAHD');
 
-    #replaysDontUpdateScoreCheck = document.getElementById('replaysDontUpdateScore');
-    #replaysAutoUpdateOverlay = document.getElementById('replaysAutoUpdateOverlay');
     #wsCheck = document.getElementById('workshopToggle');
     #customRound = document.getElementById('customRound');
     #forceWLCheck = document.getElementById('forceWLToggle');
     #scoreAutoCheck = document.getElementById("scoreAutoUpdate");
     #invertScoreCheck = document.getElementById("invertScore");
-    #simpleTextsCheck = document.getElementById("simpleTexts");
+    #simpleTextsCheck = document.getElementById("simpleTexts")
 
     #alwaysOnTopCheck = document.getElementById("alwaysOnTop");
     #resizableCheck = document.getElementById("resizableWindow");
@@ -48,12 +46,6 @@ class GuiSettings {
         this.#noLoACheck.addEventListener("click", () => {this.toggleNoLoA()});
 
         // gui settings listeners
-        this.#replaysDontUpdateScoreCheck.addEventListener("click", () => {
-            this.save("replaysDontUpdateScore", this.isReplaysDontUpdateScoreChecked())
-        });
-        this.#replaysAutoUpdateOverlay.addEventListener("click", () => {
-            this.save("replaysAutoUpdateOverlay", this.isReplaysAutoUpdateOverlayChecked())
-        });
         this.#wsCheck.addEventListener("click", () => {
             if (inside.electron) {
                 this.toggleWs();
@@ -112,8 +104,6 @@ class GuiSettings {
         if (guiSettings.forceHD) this.#noLoACheck.disabled = false;
         this.#noLoACheck.checked = guiSettings.noLoAHD;
 
-        this.#replaysDontUpdateScoreCheck.checked = guiSettings.replaysDontUpdateScore;
-        this.#replaysAutoUpdateOverlay.checked = guiSettings.replaysAutoUpdateOverlay;
         this.#wsCheck.checked = guiSettings.workshop;
         if (guiSettings.workshop) this.#altArtCheck.disabled = false;
         if (guiSettings.customRound) this.#customRound.click();
@@ -228,15 +218,6 @@ class GuiSettings {
         // save current checkbox value to the settings file
         this.save("noLoAHD", this.isNoLoAChecked());
 
-    }
-
-
-    isReplaysDontUpdateScoreChecked() {
-        return this.#replaysDontUpdateScoreCheck.checked;
-    }
-
-    isReplaysAutoUpdateOverlayChecked() {
-        return this.#replaysAutoUpdateOverlay.checked;
     }
 
     setWs(value) {
@@ -402,10 +383,6 @@ class GuiSettings {
         this.#changeZoom();
         const ipc = await import("./IPC.mjs");
         ipc.defaultWindowDimensions();
-    }
-
-    restoreWindowDefaults() {
-        this.#restoreWindowDefaults();
     }
 
 }

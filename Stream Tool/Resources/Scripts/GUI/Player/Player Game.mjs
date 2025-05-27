@@ -1,12 +1,12 @@
-import {Player} from "./Player.mjs";
-import {fileExists} from "../File System.mjs";
-import {getRecolorImage, getTrailImage} from "../GetImage.mjs";
-import {updateBgCharImg} from "./BG Char Image.mjs";
-import {currentColors} from "../Colors.mjs";
-import {settings} from "../Settings.mjs";
-import {profileInfo} from "../Profile Info.mjs";
-import {stPath} from "../Globals.mjs";
-import {gamemode} from "../Gamemode Change.mjs";
+import { Player } from "./Player.mjs";
+import { fileExists } from "../File System.mjs";
+import { getRecolorImage, getTrailImage } from "../GetImage.mjs";
+import { updateBgCharImg } from "./BG Char Image.mjs";
+import { currentColors } from "../Colors.mjs";
+import { settings } from "../Settings.mjs";
+import { profileInfo } from "../Profile Info.mjs";
+import { stPath } from "../Globals.mjs";
+import { gamemode } from "../Gamemode Change.mjs";
 
 export class PlayerGame extends Player {
 
@@ -116,10 +116,10 @@ export class PlayerGame extends Player {
 
         // change the background character image (if first 2 players)
         if (this.pNum-1 < 2) {
-            if (this.char === "Random" && this.pNum === 1) {
-                await updateBgCharImg(this.pNum-1, `${stPath.charRandom}/P2.png`);
+            if (this.char == "Random" && this.pNum == 1) {
+                updateBgCharImg(this.pNum-1, `${stPath.charRandom}/P2.png`);
             } else {
-                await updateBgCharImg(this.pNum-1, this.scSrc);
+                updateBgCharImg(this.pNum-1, this.scSrc);
             }
         }
         // notify the user that we done here
@@ -173,7 +173,7 @@ export class PlayerGame extends Player {
             let hdSkin = {};
             hdSkin.name = skinName;
             // only do this if not default skin (unless its a cutsom color)
-            if ((this.skin.name !== "Default" || this.skin.customImg) && this.skin.hex && !this.skin.name.includes("LoA") &&
+            if ((this.skin.name != "Default" || this.skin.customImg) && this.skin.hex && !this.skin.name.includes("LoA") &&
                 await fileExists(`${stPath.char}/${this.char}/Skins/HD Recolor.png`)) {
 
                 hdSkin = structuredClone(this.skin);
@@ -234,12 +234,12 @@ export class PlayerGame extends Player {
         if (this.vsSkin.name.includes("LoA") && !settings.isNoLoAChecked()) {
             // show LoA background if the skin is LoA
             vsBG = 'BG LoA.webm';
-            trueBGPath = stPath.charBase;
-        } else if (this.vsSkin.name === "Ragnir") {
+            trueBGPath = stPath.charBase;;
+        } else if (this.vsSkin.name == "Ragnir") {
             // Ragnir shows the default stage in the actual game
             vsBG = 'BG.webm';
             trueBGPath = stPath.charBase;
-        } else if (this.char === "Shovel Knight" && this.vsSkin.name === "Golden") {
+        } else if (this.char == "Shovel Knight" && this.vsSkin.name == "Golden") {
              // why not
             vsBG = `${this.char}/BG Golden.webm`;
         } else if (this.charInfo.vsScreen) { // safety check
@@ -291,7 +291,7 @@ export class PlayerGame extends Player {
                 scCharPos[2] = charPos.scoreboard.neutral.scale;
             }
         } else { // if there are no character positions, set positions for "Random"
-            if (this.pNum % 2 === 0) {
+            if (this.pNum % 2 == 0) {
                 scCharPos[0] = 30;
             } else {
                 scCharPos[0] = 35;
@@ -320,13 +320,13 @@ export class PlayerGame extends Player {
                 vsCharPos[2] = charPos.vsScreen.neutral.scale;
             }
         } else { // if there are no character positions, set positions for "Random"
-            if (this.pNum % 2 === 0) {
+            if (this.pNum % 2 == 0) {
                 vsCharPos[0] = -500;
             } else {
                 vsCharPos[0] = -475;
             }
             //if doubles, we need to move it up a bit
-            if (gamemode.getGm() === 2) {
+            if (gamemode.getGm() == 2) {
                 vsCharPos[1] = -125;
             } else {
                 vsCharPos[1] = 0;
