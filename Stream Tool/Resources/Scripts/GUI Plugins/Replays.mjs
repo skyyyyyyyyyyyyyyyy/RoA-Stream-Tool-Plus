@@ -8,11 +8,69 @@ import {scores} from "../GUI/Score/Scores.mjs";
 import {displayNotif} from "../GUI/Notifications.mjs";
 
 
-// event listener for file upload
+const uploadButtonHTML = `
+<div id="uploadReplayButtonContainer">
+  <label id="uploadReplayInput" for="replayUpload" class="botRegion" title="Upload a replay file">
+    <load-svg src="Scripts/GUI Plugins/Arrow_up.svg" id="uploadReplayIcon"></load-svg>
+  </label>
+  <input id="replayUpload" type="file" accept=".roa" onclick="this.value = null;" />
+</div>`
+
+const uploadButtonCSS = `
+input[type="file"] {
+  display: none;
+}
+
+#uploadReplayButtonContainer {
+  width: 32px;
+  background-color: var(--bg3);
+}
+
+#uploadReplayIcon {
+  width: 28px;
+  height: 28px;
+  color: var(--text2);
+}
+
+#uploadReplayInput:hover {
+  background-color: var(--bg1);
+  cursor: pointer;
+}
+
+#uploadReplayInput:active {
+  background-color: var(--bg5);
+}`
+
+// insert uploadButtonCSS as a stylesheet
+const uploadButtonCSSElement = document.createElement("style");
+uploadButtonCSSElement.textContent = uploadButtonCSS;
+document.head.appendChild(uploadButtonCSSElement);
+
+// insert upload button HTML
+document.getElementById('botBarBracket').insertAdjacentHTML("afterend", uploadButtonHTML);
+
+// event listener for upload button file upload
+document.getElementById('replayUpload').addEventListener("change", (event) => {fileUploadButton(event)});
+
+// event listener for drag-and-drop file upload
 document.getElementById('viewport').addEventListener("drop", (event) => {fileUploadDragDrop(event)});
 
 // prevents default dragover behaviour, which blocks the file drop
 document.getElementById('viewport').addEventListener("dragover", (event) => {event.preventDefault()});
+
+
+/**
+ * Handles uploading a replay file via the upload button.
+ * @param event {DragEvent} - The drag and drop event that contains the uploaded file.
+ */
+export async function fileUploadButton(event) {
+    event.preventDefault();
+
+    const file = event.target.files.item(0);
+    const replayFile = await file.text();
+
+    await updateGUIFromReplayFile(replayFile);
+}
 
 
 /**
@@ -64,7 +122,10 @@ async function updateGUIFromReplayFile(replayFile) {
 
         await GUIPlayer.charChange(replayPlayer.character, true);
         customChange(replayPlayer.skinCode, replayPlayer.taunt);
+
     }
+
+    displayNotif("Don't forget to press UPDATE!");
 }
 
 
