@@ -61,7 +61,7 @@ document.getElementById('viewport').addEventListener("dragover", (event) => {eve
 
 /**
  * Handles uploading a replay file via the upload button.
- * @param event {DragEvent} - The drag and drop event that contains the uploaded file.
+ * @param event {Event} - The upload event containing the uploaded file.
  */
 export async function fileUploadButton(event) {
     event.preventDefault();
