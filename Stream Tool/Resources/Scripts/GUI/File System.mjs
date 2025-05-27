@@ -125,27 +125,12 @@ export async function getPresetList(folderName) {
 }
 
 /**
- * Generates a json with each of the files on the plugins folder
+ * Gets user-specified plugin file paths from the plugin list
  * @returns Array of plugin filenames
  */
 export async function getPluginList() {
 
-    if (inside.electron) {
-        
-        // get us the files to look for
-        const fs = require('fs');
-        const files = fs.readdirSync(`${stPath.scripts}/GUI Plugins/`);
-
-        // save for remote gui
-        saveJson(`/Plugin List`, files);
-
-        return files;
-
-    } else {
-
-        return await getJson(`${stPath.text}/Plugin List`);
-        
-    }
+    return await getJson(`${stPath.scripts}/GUI Plugins/Plugin List`);
     
 }
 
