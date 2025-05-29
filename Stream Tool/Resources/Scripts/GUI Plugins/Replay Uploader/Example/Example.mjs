@@ -1,6 +1,6 @@
-import { displayNotif } from "../../GUI/Notifications.mjs";
-import { players } from "../../GUI/Player/Players.mjs";
-import { tournament } from "../../GUI/Tournament.mjs";
+import { displayNotif } from "../../../GUI/Notifications.mjs";
+import { players } from "../../../GUI/Player/Players.mjs";
+import { tournament } from "../../../GUI/Tournament.mjs";
 
 // this is just a regular simple plugin example
 // you can add any kind of js code here, feel free to go wild
