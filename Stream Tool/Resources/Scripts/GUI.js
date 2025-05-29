@@ -98,7 +98,7 @@ async function init() {
     // add in any plugins found on the plugins folder:
     const pluginNames = await getPluginList();
     for (let i = 0; i < pluginNames.length; i++) {
-        import("./GUI Plugins/" + pluginNames[i] + `${pluginNames[i]}.mjs`);
+        import(`./GUI Plugins/${pluginNames[i]}/${pluginNames[i]}.mjs`);
     }
 
 }
