@@ -3,6 +3,7 @@ export const inside = {
     settings : false,
     bracket : false,
     finder : false,
+    plugins : false,
     electron : typeof process !== 'undefined' // if in executable or remote gui
 };
 

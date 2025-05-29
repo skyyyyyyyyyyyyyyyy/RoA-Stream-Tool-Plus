@@ -41,9 +41,25 @@ class Viewport {
 
     }
 
+    /** Moves the viewport to plugin settings */
+    toPlugins() {
+
+        inside.plugins = true;
+        this.opacity(".25");
+        this.#moveViewportY("-100%");
+
+    }
+
+
     #moveViewport(pos) {
 
         this.#viewport.style.transform = `translateX(${pos})`;
+
+    }
+
+    #moveViewportY(pos) {
+
+        this.#viewport.style.transform = `translateY(${pos})`;
 
     }
 
