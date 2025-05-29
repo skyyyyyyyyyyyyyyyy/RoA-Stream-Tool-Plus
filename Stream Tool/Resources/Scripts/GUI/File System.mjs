@@ -5,6 +5,7 @@ import { round } from './Round.mjs';
 import { scores } from './Score/Scores.mjs';
 import { teams } from './Team/Teams.mjs';
 import { tournament } from './Tournament.mjs';
+import {displayNotif} from "./Notifications.mjs";
 
 /**
  * Returns parsed json data from a local file
@@ -135,6 +136,15 @@ export async function getPluginList() {
         // get us the files to look for
         const fs = require('fs');
         const files = fs.readdirSync(`${stPath.scripts}/GUI Plugins/`);
+
+        for (const file of files) {
+            const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${file}`);
+            if (!innerFiles.includes(`${file}.mjs`)) {
+                displayNotif(`Could not find ${file}.mjs in ${file}`);
+            } else {
+                displayNotif(`Found ${file}.mjs`);
+            }
+        }
 
         // save for remote gui
         saveJson(`/Plugin List`, files);

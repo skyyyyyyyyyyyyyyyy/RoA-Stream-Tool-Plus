@@ -14,6 +14,7 @@ import { inside, stPath } from './GUI/Globals.mjs';
 import { Score } from './GUI/Score/Score.mjs';
 import { getPluginList } from './GUI/File System.mjs';
 import { initColors } from './GUI/Colors.mjs';
+import {displayNotif} from "./GUI/Notifications.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -97,7 +98,7 @@ async function init() {
     // add in any plugins found on the plugins folder:
     const pluginNames = await getPluginList();
     for (let i = 0; i < pluginNames.length; i++) {
-        import("./GUI Plugins/" + pluginNames[i]);        
+        import("./GUI Plugins/" + pluginNames[i] + `${pluginNames[i]}.mjs`);
     }
 
 }
