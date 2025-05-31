@@ -141,8 +141,6 @@ export async function getPluginList() {
             const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${file}`);
             if (!innerFiles.includes(`${file}.mjs`)) {
                 displayNotif(`Could not find ${file}.mjs in ${file}`);
-            } else {
-                displayNotif(`Found ${file}.mjs`);
             }
         }
 
