@@ -19,6 +19,7 @@ class Viewport {
         this.#moveViewport("0");
         inside.bracket = false;
         inside.settings = false;
+        inside.plugins = false;
 
     }
 

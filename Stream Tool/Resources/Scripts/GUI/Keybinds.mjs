@@ -49,7 +49,7 @@ export function loadKeybinds() {
 
     // esc
     Mousetrap.bind('esc', () => {
-        if (inside.settings || inside.bracket) {
+        if (inside.settings || inside.bracket || inside.plugins) {
             viewport.toCenter();
         } else if (charFinder.isVisible() || skinFinder.isVisible()
         || commFinder.isVisible() || playerFinder.isVisible()) {
