@@ -1,12 +1,12 @@
-import {stPath} from "../../GUI/Globals.mjs";
+import {inside, stPath} from "../../GUI/Globals.mjs";
 import {viewport} from "../../GUI/Viewport.mjs";
-import {displayNotif} from "../../GUI/Notifications.mjs";
+import {getJson, getPluginList, saveJson} from "../../GUI/File System.mjs";
 
 const pluginButtonHTML = `
 <button id="pluginsRegion" class="botRegion" title="Go to plugin settings">
   <load-svg src="${stPath.scripts}/GUI Plugins/Plugin Settings/Plugins.svg" id="pluginsIcon"></load-svg>
 </button>
-`
+`;
 
 const pluginButtonCSS = `
 #pluginsRegion {
@@ -16,7 +16,6 @@ const pluginButtonCSS = `
 
 #pluginsRegion:hover {
   background-color: var(--bg1);
-  cursor: pointer;
 }
 
 #pluginsRegion:active {
@@ -28,77 +27,31 @@ const pluginButtonCSS = `
   height: 24px;
   color: var(--text2);
 }
-`
+`;
 
 const pluginSettingsHTML = `
 <div id="pluginSettings">
     <div id="pluginSettingsTitle">Plugin Settings</div>
     
     <div id="pluginSettingsContent">
-        <ul id="pluginsList">
-            <li>
-                <button id="pluginButton1" class="pluginButton">
-                    <span>Plugin 1</span>
-                </button>
-            </li>
-            <li>
-                <button id="pluginButton2" class="pluginButton">
-                    <span>Plugin 2</span>
-                </button>
-            </li>
-            <li>
-                <button id="pluginButton3" class="pluginButton">
-                    <span>Plugin 3</span>
-                </button>
-            </li>
-            <li>
-                <button id="pluginButton4" class="pluginButton">
-                    <span>Plugin 4</span>
-                </button>
-            </li>
-            <li>
-                <button id="pluginButton5" class="pluginButton">
-                    <span>Plugin 5</span>
-                </button>
-            </li>
-            <li>
-                <button id="pluginButton6" class="pluginButton">
-                    <span>Plugin 6</span>
-                </button>
-            </li>
-        </ul>
-                    
-        <div id="pluginSettingsList">
-            <div class="settingsTitle">Scoreboard</div>
-            
-            <div class="settingBox" title="Plays an intro on 'RoA Scoreboard.html' whenever the file loads.">
-              <input type="checkbox" id="allowIntro" class="settingsCheck" tabindex="-1">
-              <label for="allowIntro" class="settingsText">Allow Intro</span>
-            </div>
-            
-            <div class="settingBox" title="Uses alternative art for workshop characters that have one.">
-              <input type="checkbox" id="forceAlt" class="settingsCheck" disabled tabindex="-1">
-              <label for="forceAlt" id="mmText" class="settingsText">Use 'Alt' skins</span>
-            </div>
-        </div>
+        
+        <!--    will be populated by addPluginListButtons     -->
+        <ul id="pluginsList"></ul>
+        
+        <!--    will be populated by onPluginButtonClicked     -->
+        <div id="pluginSettingsList"></div>
     </div>
     
     <div id="pBotButts">
       <button id="pluginsGoBack" class="pInfoBotButt">
         <div class="pInfoIconCont">
-          <load-svg src="SVGs/Close.svg" class="pInfoIcon"></load-svg>
+          <load-svg src="SVGs/Check.svg" class="pInfoIcon"></load-svg>
         </div>
         <span>Go back</span>
       </button>
-      <button id="pluginsApplyChanges" class="pInfoBotButt">
-        <div class="pInfoIconCont">
-          <load-svg src="SVGs/Check.svg" class="pInfoIcon"></load-svg>
-        </div>
-        <span>Apply changes</span>
-      </button>
     </div>
 </div>
-`
+`;
 
 const pluginSettingsCSS = `
 #pluginSettings {
@@ -157,8 +110,17 @@ const pluginSettingsCSS = `
     height: 40px;
 }
 
+.pluginButton:hover {
+  background-color: var(--bg3);
+}
+
+.pluginButton:active {
+  background-color: var(--bg4);
+}
+
 #pluginSettingsList {
     margin: 0px auto;
+    width: 50%;
 }
 
 
@@ -167,7 +129,78 @@ const pluginSettingsCSS = `
   gap: 10px;
   padding-bottom: 15px;
 }
-`
+`;
+
+function pluginListButton(pluginName) {
+    return `
+    <li>
+        <button id="${pluginName}" class="pluginButton">
+            <span>${pluginName}</span>
+        </button>
+    </li>
+    `;
+}
+
+function pluginSettingCheckbox(pluginSetting, checked) {
+    return `
+    <div class="settingBox">
+      <input type="checkbox" id="${pluginSetting}" class="settingsCheck" tabindex="-1" ${checked ? "checked" : ""}>
+      <label for="${pluginSetting}" class="settingsText">${pluginSetting}</span>
+    </div>
+    `;
+}
+
+async function loadPlugins() {
+    const pluginNames = await getPluginList();
+    for (let i = 0; i < pluginNames.length; i++) {
+        document.getElementById("pluginsList").insertAdjacentHTML("beforeend", pluginListButton(pluginNames[i]));
+        document.getElementById(pluginNames[i]).addEventListener("click", () => onPluginButtonClicked(pluginNames[i]));
+    }
+}
+
+async function onPluginButtonClicked(pluginID) {
+
+    for (const buttonListElement of document.getElementById("pluginsList").children) {
+        const button = buttonListElement.children.item(0);
+        button.style.backgroundColor = (pluginID !== button.id) ? "" : "var(--focused)";
+    }
+    loadPluginSettings(pluginID);
+}
+
+async function loadPluginSettings(pluginID) {
+    document.getElementById("pluginSettingsList").replaceChildren();
+
+    const settings = await getPluginSettings(pluginID);
+
+    for (const setting in settings) {
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
+        document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
+    }
+}
+
+async function togglePluginSetting(pluginID, setting) {
+    // i think this should depend on what setting is being toggled?
+    // not sure how to implement actually invoking the effect of a setting toggle yet
+    const checkbox = document.getElementById(setting);
+    await savePluginSettings(pluginID, setting, checkbox.checked);
+}
+
+async function savePluginSettings(pluginID, setting, value) {
+    if (inside.electron) {
+        // read the file
+        const settings = await getPluginSettings(pluginID);
+
+        // update the setting's value
+        settings[setting] = value;
+
+        // save the file (cursed reuse of saveJson by immediately escaping the Texts folder)
+        saveJson(`/../Scripts/GUI Plugins/${pluginID}/Settings`, settings);
+    }
+}
+
+export async function getPluginSettings(pluginID) {
+    return await getJson(`${stPath.scripts}/GUI Plugins/${pluginID}/Settings`);
+}
 
 // importing plugins button to bottom bar
 document.getElementById('updateRegion').insertAdjacentHTML("afterend", pluginButtonHTML);
@@ -183,7 +216,8 @@ document.getElementById("bracket").insertAdjacentHTML("afterend", pluginSettings
 
 const pluginSettingsCSSElement = document.createElement("style");
 pluginSettingsCSSElement.textContent = pluginSettingsCSS;
-document.head.appendChild(pluginSettingsCSSElement)
+document.head.appendChild(pluginSettingsCSSElement);
+
+loadPlugins();
 
 document.getElementById("pluginsGoBack").addEventListener("click", () => {viewport.toCenter()});
-document.getElementById("pluginsApplyChanges").addEventListener("click", () => {displayNotif("Changes applied! (not really)")});

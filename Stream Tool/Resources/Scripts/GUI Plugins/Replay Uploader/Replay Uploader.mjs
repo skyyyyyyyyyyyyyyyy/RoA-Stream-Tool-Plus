@@ -6,6 +6,7 @@ import {stPath} from "../../GUI/Globals.mjs";
 import {customChange, setCurrentPlayer} from "../../GUI/Custom Skin.mjs";
 import {scores} from "../../GUI/Score/Scores.mjs";
 import {displayNotif} from "../../GUI/Notifications.mjs";
+import {getPluginSettings} from "../Plugin Settings/Plugin Settings.mjs";
 
 
 const uploadButtonHTML = `
@@ -101,7 +102,8 @@ export async function fileUploadDragDrop(event) {
  */
 async function updateGUIFromReplayFile(replayFile) {
 
-    let replay = readReplayFile(replayFile);
+    const replay = readReplayFile(replayFile);
+    const settings = await getPluginSettings("Replay Uploader");
 
     for (let i = 0; i < replay.player.length; i++) {
         let GUIPlayer = players[i];
@@ -116,7 +118,7 @@ async function updateGUIFromReplayFile(replayFile) {
         GUIPlayer.setName(replayPlayer.username);
 
         // don't want to update score for players 3 & 4, since each team uses p1 and p2 score
-        if (i < 2) {
+        if (settings["Replays update win counts"] && i < 2) {
             scores[i].setScore(replayPlayer.wins);
         }
 
