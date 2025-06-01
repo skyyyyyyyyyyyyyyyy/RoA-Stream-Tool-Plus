@@ -97,8 +97,16 @@ async function init() {
 
     // add in any plugins found on the plugins folder:
     const pluginNames = await getPluginList();
-    for (let i = 0; i < pluginNames.length; i++) {
-        import(`./GUI Plugins/${pluginNames[i]}/${pluginNames[i]}.mjs`);
+    const fs = require('fs');
+
+    for (const pluginName of pluginNames) {
+        // adding only the plugins that have a .mjs file named after the plugin folder
+        const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
+        if (innerFiles.includes(`${pluginName}.mjs`)) {
+            import(`./GUI Plugins/${pluginName}/${pluginName}.mjs`);
+        } else {
+            displayNotif(`Failed to load plugin '${pluginName}': ${pluginName}.mjs not found`);
+        }
     }
 
 }
