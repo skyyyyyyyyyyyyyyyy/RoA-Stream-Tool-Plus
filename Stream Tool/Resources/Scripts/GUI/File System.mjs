@@ -137,13 +137,6 @@ export async function getPluginList() {
         const fs = require('fs');
         const files = fs.readdirSync(`${stPath.scripts}/GUI Plugins/`);
 
-        for (const file of files) {
-            const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${file}`);
-            if (!innerFiles.includes(`${file}.mjs`)) {
-                displayNotif(`Could not find ${file}.mjs in ${file}`);
-            }
-        }
-
         // save for remote gui
         saveJson(`/Plugin List`, files);
 
