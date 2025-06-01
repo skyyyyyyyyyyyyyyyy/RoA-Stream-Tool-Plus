@@ -81,7 +81,7 @@ const pluginSettingsCSS = `
     max-height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-block-start: 1%;
     margin-block-end: 1%;
 }
@@ -89,10 +89,10 @@ const pluginSettingsCSS = `
 #pluginsList {
     list-style-type: none;
     width: 200px;
+    margin: 0px auto;
     overflow: hidden;
     overflow-y: scroll;
     padding-inline-start: 0px;
-    margin-left: 10%;
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
@@ -120,7 +120,12 @@ const pluginSettingsCSS = `
 
 #pluginSettingsList {
     margin: 0px auto;
-    width: 50%;
+    padding: 10px;
+    width: 55%;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: var(--bg3);
+    border-style: outset;
 }
 
 
@@ -172,9 +177,24 @@ async function loadPluginSettings(pluginID) {
 
     const settings = await getPluginSettings(pluginID);
 
-    for (const setting in settings) {
-        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
-        document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
+    if (settings !== null) {
+        if (!Object.hasOwn(settings, "Enabled")) {
+            settings["Enabled"] = true;
+        }
+
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend",
+            pluginSettingCheckbox("Enabled", settings["Enabled"])
+            + (Object.hasOwn(settings, "_info") ? `<p><i>${settings["_info"]}</i></p>` : "")
+            + `<div class="rectangle" style="margin: 10px auto"></div>`);
+
+        for (const setting in settings) {
+            if (setting !== "_info") {
+                if (setting !== "Enabled") {
+                    document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
+                }
+                document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
+            }
+        }
     }
 }
 
@@ -218,6 +238,11 @@ const pluginSettingsCSSElement = document.createElement("style");
 pluginSettingsCSSElement.textContent = pluginSettingsCSS;
 document.head.appendChild(pluginSettingsCSSElement);
 
-loadPlugins();
+await loadPlugins();
+
+//FIXME this calculation does not work wtf
+const pluginSettingsList = document.getElementById("pluginSettingsList");
+alert((document.getElementById("pluginsList").offsetHeight - (pluginSettingsList.maxHeight - pluginSettingsList.offsetHeight)) + "px");
+pluginSettingsList.style.maxHeight = (document.getElementById("pluginsList").offsetHeight - (pluginSettingsList.maxHeight - pluginSettingsList.offsetHeight)) + "px";
 
 document.getElementById("pluginsGoBack").addEventListener("click", () => {viewport.toCenter()});
