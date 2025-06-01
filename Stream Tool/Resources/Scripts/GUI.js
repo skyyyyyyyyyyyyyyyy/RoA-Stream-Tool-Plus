@@ -14,7 +14,6 @@ import { inside, stPath } from './GUI/Globals.mjs';
 import { Score } from './GUI/Score/Score.mjs';
 import { getPluginList } from './GUI/File System.mjs';
 import { initColors } from './GUI/Colors.mjs';
-import {displayNotif} from "./GUI/Notifications.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -104,8 +103,6 @@ async function init() {
         const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
         if (innerFiles.includes(`${pluginName}.mjs`)) {
             import(`./GUI Plugins/${pluginName}/${pluginName}.mjs`);
-        } else {
-            displayNotif(`Failed to load plugin '${pluginName}': ${pluginName}.mjs not found`);
         }
     }
 

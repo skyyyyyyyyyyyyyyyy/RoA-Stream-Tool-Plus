@@ -78,7 +78,8 @@ const pluginSettingsCSS = `
 
 #pluginSettingsContent {
     min-height: 50px;
-    max-height: 100%;
+    height: 90%;
+    max-height: 90%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -89,6 +90,7 @@ const pluginSettingsCSS = `
 #pluginsList {
     list-style-type: none;
     width: 200px;
+    align-self: center;
     margin: 0px auto;
     overflow: hidden;
     overflow-y: scroll;
@@ -128,6 +130,19 @@ const pluginSettingsCSS = `
     border-style: outset;
 }
 
+#pluginErrorContainer {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+}
+
+#pluginErrorContainer p {
+    margin-block: 0;
+    margin-block: 0;
+}
 
 #pBotButts {
   display: flex;
@@ -155,6 +170,12 @@ function pluginSettingCheckbox(pluginSetting, checked) {
     `;
 }
 
+
+function fileNotFoundErrorText(filename) {
+    return `<div id="pluginErrorContainer"><p>${filename} was not found for this plugin!</p>
+            <p>Please create a ${filename} file in the root directory of your plugin.</p></div>`
+}
+
 async function loadPlugins() {
     const pluginNames = await getPluginList();
     for (let i = 0; i < pluginNames.length; i++) {
@@ -178,22 +199,45 @@ async function loadPluginSettings(pluginID) {
     const settings = await getPluginSettings(pluginID);
 
     if (settings !== null) {
-        if (!Object.hasOwn(settings, "Enabled")) {
-            settings["Enabled"] = true;
-        }
 
-        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend",
-            pluginSettingCheckbox("Enabled", settings["Enabled"])
-            + (Object.hasOwn(settings, "_info") ? `<p><i>${settings["_info"]}</i></p>` : "")
-            + `<div class="rectangle" style="margin: 10px auto"></div>`);
+        createPluginSettingsList(pluginID, settings);
 
-        for (const setting in settings) {
-            if (setting !== "_info") {
-                if (setting !== "Enabled") {
-                    document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
-                }
-                document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
+    } else {
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText("Settings.json"));
+    }
+}
+
+
+function createPluginSettingsList(pluginID, settings) {
+
+    // add "Enabled" setting, if the settings object doesn't already have it
+    if (!Object.hasOwn(settings, "Enabled")) {
+        settings["Enabled"] = true;
+    }
+
+    // check if {pluginID}.mjs exists, display error if not
+    // is it inefficient to keep re-checking the file path every time the button is clicked?
+    // could alternatively store the active plugins in an array and look that up instead, or something like that...
+    const fs = require('fs');
+    const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginID}`);
+    if (!innerFiles.includes(`${pluginID}.mjs`)) {
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText(`${pluginID}.mjs`));
+        return;
+    }
+
+    // add enabled setting, info text, and rectangle separator to GUI
+    document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend",
+        pluginSettingCheckbox("Enabled", settings["Enabled"])
+        + (Object.hasOwn(settings, "_info") ? `<p style="font-style: italic;" ">${settings["_info"]}</p>` : "")
+        + `<div class="rectangle" style="margin: 10px auto"></div>`);
+
+    // populate settings list
+    for (const setting in settings) {
+        if (setting !== "_info") {
+            if (setting !== "Enabled") {
+                document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
             }
+            document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
         }
     }
 }
@@ -239,10 +283,5 @@ pluginSettingsCSSElement.textContent = pluginSettingsCSS;
 document.head.appendChild(pluginSettingsCSSElement);
 
 await loadPlugins();
-
-//FIXME this calculation does not work wtf
-const pluginSettingsList = document.getElementById("pluginSettingsList");
-alert((document.getElementById("pluginsList").offsetHeight - (pluginSettingsList.maxHeight - pluginSettingsList.offsetHeight)) + "px");
-pluginSettingsList.style.maxHeight = (document.getElementById("pluginsList").offsetHeight - (pluginSettingsList.maxHeight - pluginSettingsList.offsetHeight)) + "px";
 
 document.getElementById("pluginsGoBack").addEventListener("click", () => {viewport.toCenter()});
