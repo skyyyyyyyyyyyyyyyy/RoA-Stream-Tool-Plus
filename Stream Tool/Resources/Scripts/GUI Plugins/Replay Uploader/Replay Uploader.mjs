@@ -6,7 +6,6 @@ import {stPath} from "../../GUI/Globals.mjs";
 import {customChange, setCurrentPlayer} from "../../GUI/Custom Skin.mjs";
 import {scores} from "../../GUI/Score/Scores.mjs";
 import {displayNotif} from "../../GUI/Notifications.mjs";
-import {getPluginSettings} from "../Plugin Settings/Plugin Settings.mjs";
 
 
 const uploadButtonHTML = `
@@ -25,6 +24,12 @@ input[type="file"] {
 #uploadReplayButtonContainer {
   width: 32px;
   background-color: var(--bg3);
+}
+
+@media (max-width: 590px) {
+  #uploadReplayButtonContainer {
+    width: 50px;
+  }
 }
 
 #uploadReplayIcon {
@@ -103,7 +108,7 @@ export async function fileUploadDragDrop(event) {
 async function updateGUIFromReplayFile(replayFile) {
 
     const replay = readReplayFile(replayFile);
-    const settings = await getPluginSettings("Replay Uploader");
+    const settings = await getJson(`${stPath.scripts}/GUI Plugins/Replay Uploader/Settings`);
 
     for (let i = 0; i < replay.player.length; i++) {
         let GUIPlayer = players[i];

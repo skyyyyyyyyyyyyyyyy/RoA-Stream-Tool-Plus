@@ -12,7 +12,7 @@ import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { updateBracket } from './GUI/Bracket.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
 import { Score } from './GUI/Score/Score.mjs';
-import { getPluginList } from './GUI/File System.mjs';
+import {getJson, getPluginList} from './GUI/File System.mjs';
 import { initColors } from './GUI/Colors.mjs';
 
 // this is a weird way to have file svg's that can be recolored by css
@@ -101,7 +101,8 @@ async function init() {
     for (const pluginName of pluginNames) {
         // adding only the plugins that have a .mjs file named after the plugin folder
         const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
-        if (innerFiles.includes(`${pluginName}.mjs`)) {
+        const pluginSettings = await getJson(`${stPath.scripts}/GUI Plugins/${pluginName}/Settings`);
+        if (pluginSettings == null || (pluginSettings["Enabled"] && innerFiles.includes(`${pluginName}.mjs`))) {
             import(`./GUI Plugins/${pluginName}/${pluginName}.mjs`);
         }
     }

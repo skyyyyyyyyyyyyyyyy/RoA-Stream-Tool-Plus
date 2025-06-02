@@ -14,6 +14,12 @@ const pluginButtonCSS = `
   background-color: var(--bg3);
 }
 
+@media (max-width: 590px) {
+    #pluginsRegion {
+        width: 50px;
+    }
+}
+
 #pluginsRegion:hover {
   background-color: var(--bg1);
 }
@@ -230,16 +236,26 @@ function createPluginSettingsList(pluginName, settings) {
         pluginSettingCheckbox("Enabled", settings["Enabled"])
         + (Object.hasOwn(settings, "_info") ? `<p style="font-style: italic;" ">${settings["_info"]}</p>` : "")
         + `<div class="rectangle" style="margin: 10px auto"></div>`);
+    document.getElementById("Enabled").addEventListener("click", () => togglePluginEnabled(pluginName, settings));
 
     // populate settings list
     for (const setting in settings) {
-        if (setting !== "_info") {
-            if (setting !== "Enabled") {
-                document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
-            }
+        if (setting !== "_info" && setting !== "Enabled") {
+            document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
             document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginName, setting));
+            document.getElementById(setting).disabled = !settings["Enabled"];
         }
     }
+}
+
+async function togglePluginEnabled(pluginName, settings) {
+    settings["Enabled"] = !settings["Enabled"];
+    for (const setting in settings) {
+        if (setting !== "_info" && setting !== "Enabled") {
+            document.getElementById(setting).disabled = !settings["Enabled"];
+        }
+    }
+    await savePluginSettings(pluginName, "Enabled", settings["Enabled"]);
 }
 
 async function togglePluginSetting(pluginName, setting) {
