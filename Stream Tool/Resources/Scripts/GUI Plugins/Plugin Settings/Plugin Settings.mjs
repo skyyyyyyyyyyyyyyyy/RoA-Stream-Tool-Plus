@@ -184,23 +184,23 @@ async function loadPlugins() {
     }
 }
 
-async function onPluginButtonClicked(pluginID) {
+async function onPluginButtonClicked(pluginName) {
 
     for (const buttonListElement of document.getElementById("pluginsList").children) {
         const button = buttonListElement.children.item(0);
-        button.style.backgroundColor = (pluginID !== button.id) ? "" : "var(--focused)";
+        button.style.backgroundColor = (pluginName !== button.id) ? "" : "var(--focused)";
     }
-    loadPluginSettings(pluginID);
+    loadPluginSettings(pluginName);
 }
 
-async function loadPluginSettings(pluginID) {
+async function loadPluginSettings(pluginName) {
     document.getElementById("pluginSettingsList").replaceChildren();
 
-    const settings = await getPluginSettings(pluginID);
+    const settings = await getPluginSettings(pluginName);
 
     if (settings !== null) {
 
-        createPluginSettingsList(pluginID, settings);
+        createPluginSettingsList(pluginName, settings);
 
     } else {
         document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText("Settings.json"));
@@ -208,20 +208,20 @@ async function loadPluginSettings(pluginID) {
 }
 
 
-function createPluginSettingsList(pluginID, settings) {
+function createPluginSettingsList(pluginName, settings) {
 
     // add "Enabled" setting, if the settings object doesn't already have it
     if (!Object.hasOwn(settings, "Enabled")) {
         settings["Enabled"] = true;
     }
 
-    // check if {pluginID}.mjs exists, display error if not
+    // check if {pluginName}.mjs exists, display error if not
     // is it inefficient to keep re-checking the file path every time the button is clicked?
     // could alternatively store the active plugins in an array and look that up instead, or something like that...
     const fs = require('fs');
-    const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginID}`);
-    if (!innerFiles.includes(`${pluginID}.mjs`)) {
-        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText(`${pluginID}.mjs`));
+    const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
+    if (!innerFiles.includes(`${pluginName}.mjs`)) {
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText(`${pluginName}.mjs`));
         return;
     }
 
@@ -237,33 +237,33 @@ function createPluginSettingsList(pluginID, settings) {
             if (setting !== "Enabled") {
                 document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", pluginSettingCheckbox(setting, settings[setting]));
             }
-            document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginID, setting));
+            document.getElementById(setting).addEventListener("click", () => togglePluginSetting(pluginName, setting));
         }
     }
 }
 
-async function togglePluginSetting(pluginID, setting) {
+async function togglePluginSetting(pluginName, setting) {
     // i think this should depend on what setting is being toggled?
     // not sure how to implement actually invoking the effect of a setting toggle yet
     const checkbox = document.getElementById(setting);
-    await savePluginSettings(pluginID, setting, checkbox.checked);
+    await savePluginSettings(pluginName, setting, checkbox.checked);
 }
 
-async function savePluginSettings(pluginID, setting, value) {
+async function savePluginSettings(pluginName, setting, value) {
     if (inside.electron) {
         // read the file
-        const settings = await getPluginSettings(pluginID);
+        const settings = await getPluginSettings(pluginName);
 
         // update the setting's value
         settings[setting] = value;
 
         // save the file (cursed reuse of saveJson by immediately escaping the Texts folder)
-        saveJson(`/../Scripts/GUI Plugins/${pluginID}/Settings`, settings);
+        saveJson(`/../Scripts/GUI Plugins/${pluginName}/Settings`, settings);
     }
 }
 
-export async function getPluginSettings(pluginID) {
-    return await getJson(`${stPath.scripts}/GUI Plugins/${pluginID}/Settings`);
+export async function getPluginSettings(pluginName) {
+    return await getJson(`${stPath.scripts}/GUI Plugins/${pluginName}/Settings`);
 }
 
 // importing plugins button to bottom bar
