@@ -6,6 +6,7 @@ import {stPath} from "../../GUI/Globals.mjs";
 import {customChange, setCurrentPlayer} from "../../GUI/Custom Skin.mjs";
 import {scores} from "../../GUI/Score/Scores.mjs";
 import {displayNotif} from "../../GUI/Notifications.mjs";
+import {writeScoreboard} from "../../GUI/Write Scoreboard.mjs";
 
 
 const uploadButtonHTML = `
@@ -96,7 +97,7 @@ export async function fileUploadDragDrop(event) {
         const replayFile = await file.text();
         updateGUIFromReplayFile(replayFile);
 
-    } else alert("That is NOT a .roa file!");
+    } else displayNotif("That is NOT a .roa file!");
 
 }
 
@@ -128,11 +129,15 @@ async function updateGUIFromReplayFile(replayFile) {
         }
 
         await GUIPlayer.charChange(replayPlayer.character, true);
-        customChange(replayPlayer.skinCode, replayPlayer.taunt);
+        await customChange(replayPlayer.skinCode, replayPlayer.taunt);
 
     }
 
-    displayNotif("Don't forget to press UPDATE!");
+    if (settings["Replays auto-update overlay"]) {
+        writeScoreboard();
+    } else {
+        displayNotif("Don't forget to press UPDATE!");
+    }
 }
 
 

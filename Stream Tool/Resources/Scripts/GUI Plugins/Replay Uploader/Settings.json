@@ -1,4 +1,5 @@
 {
-  "Replays update win counts": false,
+  "Replays update win counts": true,
+  "Replays auto-update overlay": false,
   "Enabled": true
 }
