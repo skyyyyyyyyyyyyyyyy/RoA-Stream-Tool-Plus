@@ -38,15 +38,12 @@ const pluginButtonCSS = `
 const pluginSettingsHTML = `
 <div id="pluginSettings">
     <div id="pluginSettingsTitle">Plugin Settings</div>
+   
+    <!--    will be populated by addPluginListButtons     -->
+    <ul id="pluginsList"></ul>
     
-    <div id="pluginSettingsContent">
-        
-        <!--    will be populated by addPluginListButtons     -->
-        <ul id="pluginsList"></ul>
-        
-        <!--    will be populated by onPluginButtonClicked     -->
-        <div id="pluginSettingsList"></div>
-    </div>
+    <!--    will be populated by onPluginButtonClicked     -->
+    <div id="pluginSettingsList"></div>
     
     <div id="pBotButts">
       <button id="pluginsGoBack" class="pInfoBotButt">
@@ -65,10 +62,11 @@ const pluginSettingsCSS = `
   width: 100%;
   height: 100%;
   transform: translateY(100%);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 3fr 1fr;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   gap: 10px;
   background-color: var(--bg5);
   overflow: hidden;
@@ -80,29 +78,26 @@ const pluginSettingsCSS = `
   border-bottom: solid 1px var(--text2);
   padding-top: 15px;
   text-transform: uppercase;
+  grid-row: 1;
+  grid-column: 2;
+  width: fit-content;
+  justify-self: center;
+  align-self: end;
 }
 
-#pluginSettingsContent {
-    min-height: 50px;
-    height: 90%;
-    max-height: 90%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-block-start: 1%;
-    margin-block-end: 1%;
-}
+
 
 #pluginsList {
     list-style-type: none;
-    width: 200px;
-    align-self: center;
-    margin: 0px auto;
-    overflow: hidden;
-    overflow-y: scroll;
     padding-inline-start: 0px;
     margin-block-start: 0px;
     margin-block-end: 0px;
+    width: 200px;
+    justify-self: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    grid-column: 1;
+    grid-row: 1 / span 3;
 }
 
 #pluginsList li:nth-child(odd) {
@@ -129,11 +124,15 @@ const pluginSettingsCSS = `
 #pluginSettingsList {
     margin: 0px auto;
     padding: 10px;
-    width: 55%;
+    width: 80%;
+    height: 90%;
+    justify-self: center;
     overflow: hidden;
     overflow-y: scroll;
     background-color: var(--bg3);
     border-style: outset;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 #pluginErrorContainer {
@@ -154,6 +153,9 @@ const pluginSettingsCSS = `
   display: flex;
   gap: 10px;
   padding-bottom: 15px;
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  justify-content: center;
 }
 `;
 

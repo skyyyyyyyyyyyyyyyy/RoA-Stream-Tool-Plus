@@ -1,9 +1,0 @@
-{
-  "_info": "This is an example plugin. Take a look at me in the files to understand how plugins work!",
-  "Example setting": true,
-  "Enabled": false,
-  "setting1": true,
-  "setting2": true,
-  "setting3": true,
-  "setting4": true
-}
