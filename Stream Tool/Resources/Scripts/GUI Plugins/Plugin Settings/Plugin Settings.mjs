@@ -45,14 +45,12 @@ const pluginSettingsHTML = `
     <!--    will be populated by onPluginButtonClicked     -->
     <div id="pluginSettingsList"></div>
     
-    <div id="pBotButts">
-      <button id="pluginsGoBack" class="pInfoBotButt">
+    <button id="pluginsGoBack" class="pInfoBotButt">
         <div class="pInfoIconCont">
-          <load-svg src="SVGs/Check.svg" class="pInfoIcon"></load-svg>
+            <load-svg src="SVGs/Check.svg" class="pInfoIcon"></load-svg>
         </div>
         <span>Go back</span>
-      </button>
-    </div>
+    </button>
 </div>
 `;
 
@@ -85,8 +83,6 @@ const pluginSettingsCSS = `
   align-self: end;
 }
 
-
-
 #pluginsList {
     list-style-type: none;
     padding-inline-start: 0px;
@@ -94,6 +90,7 @@ const pluginSettingsCSS = `
     margin-block-end: 0px;
     width: 200px;
     justify-self: center;
+    max-height: 100%;
     overflow: hidden;
     overflow-y: scroll;
     grid-column: 1;
@@ -125,7 +122,7 @@ const pluginSettingsCSS = `
     margin: 0px auto;
     padding: 10px;
     width: 80%;
-    height: 90%;
+    height: 80%;
     justify-self: center;
     overflow: hidden;
     overflow-y: scroll;
@@ -146,16 +143,13 @@ const pluginSettingsCSS = `
 
 #pluginErrorContainer p {
     margin-block: 0;
-    margin-block: 0;
 }
 
-#pBotButts {
-  display: flex;
-  gap: 10px;
-  padding-bottom: 15px;
+#pluginsGoBack {
   grid-column: 1 / span 2;
   grid-row: 3;
-  justify-content: center;
+  justify-self: center;
+  align-self: center;
 }
 `;
 
