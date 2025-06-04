@@ -43,7 +43,7 @@ const pluginSettingsHTML = `
     <ul id="pluginsList"></ul>
     
     <!--    will be populated by onPluginButtonClicked     -->
-    <div id="pluginSettingsList"></div>
+    <div id="pluginSettingsList" class="scroll-shadows"></div>
     
     <button id="pluginsGoBack" class="pInfoBotButt">
         <div class="pInfoIconCont">
@@ -151,7 +151,43 @@ const pluginSettingsCSS = `
   justify-self: center;
   align-self: center;
 }
-`;
+
+/* taken from https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/ */
+.scroll-shadows {
+  max-height: 200px;
+  overflow: auto;
+
+  background:
+    /* Shadow Cover TOP */
+    linear-gradient(
+      var(--bg3) 30%,
+      rgba(255, 255, 255, 0)
+    ) center top,
+    
+    /* Shadow Cover BOTTOM */
+    linear-gradient(
+      rgba(255, 255, 255, 0), 
+      var(--bg3) 70%
+    ) center bottom,
+    
+    /* Shadow TOP */
+    radial-gradient(
+      farthest-side at 50% 20%,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0)
+    ) center top,
+    
+    /* Shadow BOTTOM */
+    radial-gradient(
+      farthest-side at 50% 80%,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0)
+    ) center bottom;
+  
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  background-attachment: local, local, scroll, scroll;
+}`;
 
 function pluginListButton(pluginName) {
     return `
@@ -278,22 +314,27 @@ export async function getPluginSettings(pluginName) {
     return await getJson(`${stPath.scripts}/GUI Plugins/${pluginName}/Settings`);
 }
 
-// importing plugins button to bottom bar
-document.getElementById('updateRegion').insertAdjacentHTML("afterend", pluginButtonHTML);
+async function init() {
+    // importing plugins button to bottom bar
+    document.getElementById('updateRegion').insertAdjacentHTML("afterend", pluginButtonHTML);
 
-const uploadButtonCSSElement = document.createElement("style");
-uploadButtonCSSElement.textContent = pluginButtonCSS;
-document.head.appendChild(uploadButtonCSSElement);
+    const uploadButtonCSSElement = document.createElement("style");
+    uploadButtonCSSElement.textContent = pluginButtonCSS;
+    document.head.appendChild(uploadButtonCSSElement);
 
-document.getElementById("pluginsRegion").addEventListener("click", () => {viewport.toPlugins()});
+    document.getElementById("pluginsRegion").addEventListener("click", () => {viewport.toPlugins()});
 
-// importing plugin settings window
-document.getElementById("bracket").insertAdjacentHTML("afterend", pluginSettingsHTML);
+    // importing plugin settings window
+    document.getElementById("bracket").insertAdjacentHTML("afterend", pluginSettingsHTML);
 
-const pluginSettingsCSSElement = document.createElement("style");
-pluginSettingsCSSElement.textContent = pluginSettingsCSS;
-document.head.appendChild(pluginSettingsCSSElement);
+    const pluginSettingsCSSElement = document.createElement("style");
+    pluginSettingsCSSElement.textContent = pluginSettingsCSS;
+    document.head.appendChild(pluginSettingsCSSElement);
 
-await loadPlugins();
+    await loadPlugins();
 
-document.getElementById("pluginsGoBack").addEventListener("click", () => {viewport.toCenter()});
+    document.getElementById("pluginsGoBack").addEventListener("click", () => {viewport.toCenter()});
+}
+
+
+init();
