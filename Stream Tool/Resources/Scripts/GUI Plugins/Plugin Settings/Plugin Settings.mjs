@@ -189,6 +189,11 @@ const pluginSettingsCSS = `
   background-attachment: local, local, scroll, scroll;
 }`;
 
+/**
+ * Generates the HTML for a plugin list button.
+ * @param {string} pluginName - The name of the plugin.
+ * @returns {string} The HTML string for the button.
+ */
 function pluginListButton(pluginName) {
     return `
     <li>
@@ -199,6 +204,12 @@ function pluginListButton(pluginName) {
     `;
 }
 
+/**
+ * Generates the HTML for a plugin setting checkbox.
+ * @param {string} pluginSetting - The name of the setting.
+ * @param {boolean} checked - Whether the checkbox is checked.
+ * @returns {string} The HTML string for the checkbox.
+ */
 function pluginSettingCheckbox(pluginSetting, checked) {
     return `
     <div class="settingBox">
@@ -208,12 +219,19 @@ function pluginSettingCheckbox(pluginSetting, checked) {
     `;
 }
 
-
+/**
+ * Generates an error message for a missing file.
+ * @param {string} filename - The name of the missing file.
+ * @returns {string} The HTML string for the error message.
+ */
 function fileNotFoundErrorText(filename) {
     return `<div id="pluginErrorContainer"><p>${filename} was not found for this plugin!</p>
             <p>Please create a ${filename} file in the root directory of your plugin.</p></div>`
 }
 
+/**
+ * Loads the list of plugins and adds them to the plugin list in the GUI.
+ */
 async function loadPlugins() {
     const pluginNames = await getPluginList();
     for (let i = 0; i < pluginNames.length; i++) {
@@ -222,6 +240,10 @@ async function loadPlugins() {
     }
 }
 
+/**
+ * Highlights the selected plugin button and loads its settings.
+ * @param {string} pluginName - The name of the clicked plugin.
+ */
 async function onPluginButtonClicked(pluginName) {
 
     for (const buttonListElement of document.getElementById("pluginsList").children) {
@@ -231,21 +253,27 @@ async function onPluginButtonClicked(pluginName) {
     loadPluginSettings(pluginName);
 }
 
+/**
+ * Displays a plugin's settings in the GUI.
+ * @param {string} pluginName - The name of the plugin.
+ */
 async function loadPluginSettings(pluginName) {
     document.getElementById("pluginSettingsList").replaceChildren();
 
     const settings = await getPluginSettings(pluginName);
 
     if (settings !== null) {
-
         createPluginSettingsList(pluginName, settings);
-
     } else {
         document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText("Settings.json"));
     }
 }
 
-
+/**
+ * Creates the settings list for a plugin and adds it to the GUI.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {Object} settings - The settings object for the plugin.
+ */
 function createPluginSettingsList(pluginName, settings) {
 
     // add "Enabled" setting, if the settings object doesn't already have it
@@ -280,6 +308,11 @@ function createPluginSettingsList(pluginName, settings) {
     }
 }
 
+/**
+ * Toggles the "Enabled" setting for a plugin and updates the GUI.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {Object} settings - The settings object for the plugin.
+ */
 async function togglePluginEnabled(pluginName, settings) {
     settings["Enabled"] = !settings["Enabled"];
     for (const setting in settings) {
@@ -290,6 +323,11 @@ async function togglePluginEnabled(pluginName, settings) {
     await savePluginSettings(pluginName, "Enabled", settings["Enabled"]);
 }
 
+/**
+ * Toggles a specific setting for a plugin and saves the change.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {string} setting - The name of the setting to toggle.
+ */
 async function togglePluginSetting(pluginName, setting) {
     // i think this should depend on what setting is being toggled?
     // not sure how to implement actually invoking the effect of a setting toggle yet
@@ -297,6 +335,12 @@ async function togglePluginSetting(pluginName, setting) {
     await savePluginSettings(pluginName, setting, checkbox.checked);
 }
 
+/**
+ * Saves a plugin's settings to its JSON file.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {string} setting - The name of the setting to save.
+ * @param {any} value - The value of the setting to save.
+ */
 async function savePluginSettings(pluginName, setting, value) {
     if (inside.electron) {
         // read the file
@@ -310,10 +354,18 @@ async function savePluginSettings(pluginName, setting, value) {
     }
 }
 
+/**
+ * Instantiates a settings object for a plugin.
+ * @param {string} pluginName - The name of the plugin.
+ * @returns {Object} The settings object for the plugin.
+ */
 export async function getPluginSettings(pluginName) {
     return await getJson(`${stPath.scripts}/GUI Plugins/${pluginName}/Settings`);
 }
 
+/**
+ * Initializes the plugin settings module by adding the plugin button and settings window to the GUI.
+ */
 async function init() {
     // importing plugins button to bottom bar
     document.getElementById('updateRegion').insertAdjacentHTML("afterend", pluginButtonHTML);
