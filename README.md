@@ -1,14 +1,15 @@
 
-<p align="center">
+<p style="text-align: center">
 
   <img src="https://github.com/Readek/RoA-Stream-Tool/blob/master/preview.png" alt="Preview">
   
 </p>
 
-<h1 align="center">RoA Stream Tool+</h1>
+<h1 style="text-align: center">RoA Stream Tool+</h1>
 
-<h2 align="center">Now with replay uploading functionality! Extract game data right from the replay file, including player names, characters, win counts, and custom colours!
-<h3 align="center">*the rest of this README is unchanged*</h3></h2>
+<h2 align="center">Now with plugin functionality!
+<h3 align="center">Plugin included: Replay Uploader (Extract game data right from a replay file, including player names, characters, win counts, and custom colours!)</h3></h2>
+*the rest of this README is unchanged*
 
 
 So you want to do a Rivals of Aether stream, huh? Well, today is your lucky day, because I have done tons of work so you don’t have to! With this tool, you will be able to set up a RoA tournament stream in no time.
