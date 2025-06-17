@@ -140,5 +140,6 @@ async function updateGUIFromReplayFile(replayFile) {
     }
 }
 
-
-displayNotif("Drag and drop a .roa file!");
+// reminder that drag and drop exists (disable it if you want)
+const settings = await getJson(`${stPath.scripts}/GUI Plugins/Replay Uploader/Settings`);
+if (!settings["Disable startup notification"]) displayNotif("Drag and drop a .roa file!");

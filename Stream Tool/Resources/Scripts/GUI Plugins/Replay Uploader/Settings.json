@@ -2,5 +2,6 @@
   "_info": "This plugin allows you to upload replay files from RoA straight into the GUI! Drag and drop a .roa file, or use the upload button!",
   "Replays update win counts": true,
   "Replays auto-update overlay": false,
+  "Disable startup notification": false,
   "Enabled": true
 }
