@@ -126,6 +126,16 @@ export async function getPresetList(folderName) {
 }
 
 /**
+ * Checks if a plugin contains an inner .mjs file with the same name as the parent directory
+ * @returns {boolean} true if .mjs exists, false if not
+ */
+function doesInnerPluginFileExist(pluginName) {
+    const fs = require('fs');
+    const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
+    return innerFiles.includes(`${pluginName}.mjs`);
+}
+
+/**
  * Generates a json with each of the files on the plugins folder
  * @returns Array of plugin filenames
  */
@@ -135,12 +145,13 @@ export async function getPluginList() {
         
         // get us the files to look for
         const fs = require('fs');
-        const files = fs.readdirSync(`${stPath.scripts}/GUI Plugins/`);
+        const pluginArray = fs.readdirSync(`${stPath.scripts}/GUI Plugins/`);
+        const pluginObject = Object.fromEntries(pluginArray.map(plugin => [plugin, doesInnerPluginFileExist(plugin)]))
 
         // save for remote gui
-        saveJson(`/Plugin List`, files);
+        saveJson(`/Plugin List`, pluginObject);
 
-        return files;
+        return pluginObject;
 
     } else {
 
