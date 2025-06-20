@@ -170,7 +170,7 @@ export async function getPluginSettings(pluginName) {
 }
 
 /**
- * Initializes the plugin settings module by adding the plugin button and settings window to the GUI.
+ * Loads the plugin window functionality.
  */
 export async function initPluginSettings() {
     document.getElementById("pluginsRegion").addEventListener("click", () => {viewport.toPlugins()});
