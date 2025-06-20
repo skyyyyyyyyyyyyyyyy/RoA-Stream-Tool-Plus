@@ -234,38 +234,41 @@ function fileNotFoundErrorText(filename) {
  */
 async function loadPlugins() {
     const pluginNames = await getPluginList();
-    for (let i = 0; i < pluginNames.length; i++) {
-        document.getElementById("pluginsList").insertAdjacentHTML("beforeend", pluginListButton(pluginNames[i]));
-        document.getElementById(pluginNames[i]).addEventListener("click", () => onPluginButtonClicked(pluginNames[i]));
+    for (const pluginName in pluginNames) {
+        document.getElementById("pluginsList").insertAdjacentHTML("beforeend", pluginListButton(pluginName));
+        document.getElementById(pluginName).addEventListener("click", () => onPluginButtonClicked(pluginName, pluginNames[pluginName]));
     }
 }
 
 /**
  * Highlights the selected plugin button and loads its settings.
  * @param {string} pluginName - The name of the clicked plugin.
+ * @param {boolean} mjsFound - Whether the plugin has a valid mjs file.
  */
-async function onPluginButtonClicked(pluginName) {
-
+async function onPluginButtonClicked(pluginName, mjsFound) {
     for (const buttonListElement of document.getElementById("pluginsList").children) {
         const button = buttonListElement.children.item(0);
         button.style.backgroundColor = (pluginName !== button.id) ? "" : "var(--focused)";
     }
-    loadPluginSettings(pluginName);
+    loadPluginSettings(pluginName, mjsFound);
 }
 
 /**
  * Displays a plugin's settings in the GUI.
  * @param {string} pluginName - The name of the plugin.
+ * @param {boolean} mjsFound - Whether the plugin has a valid mjs file.
  */
-async function loadPluginSettings(pluginName) {
+async function loadPluginSettings(pluginName, mjsFound) {
     document.getElementById("pluginSettingsList").replaceChildren();
 
     const settings = await getPluginSettings(pluginName);
 
-    if (settings !== null) {
-        createPluginSettingsList(pluginName, settings);
-    } else {
+    if (!mjsFound) {
+        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText(pluginName + ".mjs"));
+    } else if (settings == null) {
         document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText("Settings.json"));
+    } else {
+        createPluginSettingsList(pluginName, settings);
     }
 }
 
@@ -279,16 +282,6 @@ function createPluginSettingsList(pluginName, settings) {
     // add "Enabled" setting, if the settings object doesn't already have it
     if (!Object.hasOwn(settings, "Enabled")) {
         settings["Enabled"] = true;
-    }
-
-    // check if {pluginName}.mjs exists, display error if not
-    // is it inefficient to keep re-checking the file path every time the button is clicked?
-    // could alternatively store the active plugins in an array and look that up instead, or something like that...
-    const fs = require('fs');
-    const innerFiles = fs.readdirSync(`${stPath.scripts}/GUI Plugins/${pluginName}`);
-    if (!innerFiles.includes(`${pluginName}.mjs`)) {
-        document.getElementById("pluginSettingsList").insertAdjacentHTML("beforeend", fileNotFoundErrorText(`${pluginName}.mjs`));
-        return;
     }
 
     // add enabled setting, info text, and rectangle separator to GUI
