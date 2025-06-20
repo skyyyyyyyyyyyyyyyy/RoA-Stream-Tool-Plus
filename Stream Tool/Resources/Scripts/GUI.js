@@ -15,6 +15,7 @@ import { Score } from './GUI/Score/Score.mjs';
 import {getJson, getPluginList} from './GUI/File System.mjs';
 import { initColors } from './GUI/Colors.mjs';
 import {displayNotif} from "./GUI/Notifications.mjs";
+import {initPluginSettings} from "./GUI/Plugin Settings.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -101,4 +102,6 @@ async function init() {
         if (pluginNames[pluginName]) import(`./GUI Plugins/${pluginName}/${pluginName}.mjs`);
     }
 
+    // initialise the plugin settings window
+    initPluginSettings();
 }

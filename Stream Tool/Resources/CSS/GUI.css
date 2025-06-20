@@ -825,6 +825,30 @@ button:hover {
   background-color: var(--bg5);
 }
 
+#pluginsRegion {
+  width: 32px;
+  background-color: var(--bg3);
+}
+
+@media (max-width: 590px) {
+  #pluginsRegion {
+    width: 50px;
+  }
+}
+
+#pluginsRegion:hover {
+  background-color: var(--bg1);
+}
+
+#pluginsRegion:active {
+  background-color: var(--bg5);
+}
+
+#pluginsIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--text2);
+}
 
 /* settings section */
 #settings {
@@ -1018,6 +1042,140 @@ button:hover {
   gap: 10px;
 }
 
+/* Plugin settings section */
+#pluginSettings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 3fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg5);
+  overflow: hidden;
+}
+
+#pluginSettingsTitle {
+  font-family: "Roboto-Medium";
+  font-size: 18px;
+  border-bottom: solid 1px var(--text2);
+  padding-top: 15px;
+  text-transform: uppercase;
+  grid-row: 1;
+  grid-column: 2;
+  width: fit-content;
+  justify-self: center;
+  align-self: end;
+}
+
+#pluginsList {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  width: 200px;
+  justify-self: center;
+  max-height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+}
+
+#pluginsList li:nth-child(odd) {
+  background-color: var(--bg2);
+}
+
+#pluginsList::-webkit-scrollbar-track {
+  background: var(--bg3);
+}
+
+.pluginButton {
+  width: 100%;
+  height: 40px;
+}
+
+.pluginButton:hover {
+  background-color: var(--bg3);
+}
+
+.pluginButton:active {
+  background-color: var(--bg4);
+}
+
+#pluginSettingsList {
+  margin: 0px auto;
+  padding: 10px;
+  width: 80%;
+  height: 80%;
+  justify-self: center;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: var(--bg3);
+  border-style: outset;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#pluginErrorContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 15px;
+}
+
+#pluginErrorContainer p {
+  margin-block: 0;
+}
+
+#pluginsGoBack {
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  justify-self: center;
+  align-self: center;
+}
+
+/* taken from https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/ */
+.scroll-shadows {
+  max-height: 200px;
+  overflow: auto;
+
+  background:
+    /* Shadow Cover TOP */
+          linear-gradient(
+                  var(--bg3) 30%,
+                  rgba(255, 255, 255, 0)
+          ) center top,
+
+            /* Shadow Cover BOTTOM */
+          linear-gradient(
+                  rgba(255, 255, 255, 0),
+                  var(--bg3) 70%
+          ) center bottom,
+
+            /* Shadow TOP */
+          radial-gradient(
+                  farthest-side at 50% 20%,
+                  rgba(0, 0, 0, 0.2),
+                  rgba(0, 0, 0, 0)
+          ) center top,
+
+            /* Shadow BOTTOM */
+          radial-gradient(
+                  farthest-side at 50% 80%,
+                  rgba(0, 0, 0, 0.2),
+                  rgba(0, 0, 0, 0)
+          ) center bottom;
+
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  background-attachment: local, local, scroll, scroll;
+}
 
 /* clickable area that gets enabled when moving the viewport */
 #goBack {
